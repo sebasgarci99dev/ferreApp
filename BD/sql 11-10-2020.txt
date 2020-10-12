@@ -1,0 +1,23 @@
+CREATE TABLE `tipo_usuario` (
+  `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoUsuario` varchar(45) NOT NULL,
+  PRIMARY KEY (`idTipoUsuario`)
+);
+
+INSERT INTO `tipo_usuario`(tipoUsuario) VALUES ('admin'),('vendedor');
+
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(45) DEFAULT NULL,
+  `Contrasena` varchar(45) DEFAULT NULL,
+  `Nombre` varchar(45) NOT NULL,
+  `Apellido` varchar(45) NOT NULL,
+  `Direccion` varchar(45) NOT NULL,
+  `Telefono` int(15) NOT NULL,
+  `fechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `idTipoUsuario` int(11) NOT NULL,
+  `borrado` int(2) DEFAULT '0',
+  PRIMARY KEY (`idUsuario`),
+  KEY `fk_Usuario_Tipo_Usuario1_idx` (`idTipoUsuario`),
+  CONSTRAINT `fk_Usuario_Tipo_Usuario1` FOREIGN KEY (`idTipoUsuario`) REFERENCES `tipo_usuario` (`idTipoUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
