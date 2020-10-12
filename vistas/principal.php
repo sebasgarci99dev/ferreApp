@@ -18,15 +18,20 @@
 		<link rel="stylesheet" type="text/css" href="../librerias/css/main.css">
 	</head>
 	<style type="text/css">
+		body {
+			background-color: #efefef;
+		}
+
 		.navbar {
-			background-color: #91b4c3;
+			background-color: #c5c5c5;
 		}
 
 		.contenedorTarjetas {
 			display: flex;
-			justify-content: center;
+			/*justify-content: center;*/
 			text-align: center;
 			padding-top: 1rem;
+			overflow-x: auto;
 		}
 
 		.card {
@@ -38,16 +43,17 @@
 		.cardReportes {
 			cursor: pointer;
 			border-radius: 1.5rem;
-			background-color: #91b4c3;
-			color: white; 
+			background-color: #c5c5c5;
+			color: black; 
 		}
 
 		#menuUsuario {
 			display: none;
-			margin-top: 1rem;
-			border-radius: 2rem;
-			background-color: #91b4c3;
-			color: white;
+			margin-top: 1.1%;
+			border-radius: .25rem;
+			border: 1px solid rgba(0,0,0,.125);
+			background-color: white;
+			color: black;
 		}
 
 		#menuUsuario ul {
@@ -76,8 +82,7 @@
 			width: 100%;
 			height: 100%;
 			position: absolute;
-			filter: blur(2px);
-
+			filter: contrast(0.5);
 		}
 
 		.card-img-top {
@@ -87,30 +92,30 @@
 			border-radius: 1rem;
 		}
 		.card-body {
-			color: white;
+			color: black;
 		}
 		.card-text {
-			color: white;
+			color: black;
 		}
 
 	</style>
-<img src="../librerias/images/fondoPrincipal1.jpg" id="imgPrincipal">
+<!-- <img src="../librerias/images/fondoPrincipal1.jpg" id="imgPrincipal"> -->
 <body>
 	<div class="sidebar-menu">
 	  	<nav class="navbar navbar-dark">
 	    	<button class="navbar-toggler col-1" id="abrirMenu" type="button">
 	      		<span class="navbar-toggler-icon"></span>
 	    	</button>
-	    	<div class="col-11 d-flex justify-content-center" style="color: white;">
-	    		<h3> | FerreApp | </h3>
+	    	<div class="col-11 d-flex justify-content-center" style="color: black;">
+	    		<h1> | FerreApp | </h1>
 	    	</div>
 	  	</nav>
 	</div>
 	<div class="col-lg-12 d-flex">
 		<div id="menuUsuario" class="col-lg-2">
 	      	<ul>
-	      		<li>Hola <br><?php echo $user['Nombre'];?></li>
-	      		<li><?php echo $user['Apellido'];?></li>
+	      		<li>Hola <i><br><?php echo $user['Nombre'];?></li>
+	      		<li><?php echo $user['Apellido'];?></li> </i>
 	      		<br>
 	      		<li><?php echo $user['Email'];?></li>
 	      		<br>
@@ -123,45 +128,36 @@
 	  		</a>
 	    </div>
 
-		<div class="col-lg-12 contenedor2">
-			<div class="contenedorTarjetas">
-<!-- 				<div class="card col-lg-3 col-md-6 col-xs-12 cardUsuarios">
-					<a href="formularioBarberos.php">
-					  	<img src="../librerias/images/barberos.PNG" class="card-img-top" alt="...">
-					  	<div class="card-body">
-					    	<h5 class="card-title">Usuarios</h5>
-					    	<p class="card-text">Administra tus usuarios del sistema</p>
-					  	</div>
-					</a>
-				</div> -->
-				<div class="card col-lg-3 col-md-6 col-xs-12 cardProductos">
-					<a href="formularioAgenda.php">
-					  	<img src="../librerias/images/productos.jpg" class="card-img-top" alt="...">
-					  	<div class="card-body">
-					    	<h5 class="card-title">Productos</h5>
-					    	<p class="card-text">Administra los productos de la Ferreteria</p>
-					  	</div>
-					</a>
-				</div>
-				<div class="card col-lg-3 col-md-6 col-xs-12 cardBodega">
-					<a href="formularioTurnos.php">
-					  	<img src="../librerias/images/bodega.jpg" class="card-img-top" alt="...">
-					  	<div class="card-body">
-					    	<h5 class="card-title">Bodega</h5>
-					    	<p class="card-text">Ten tu inventario listo</p>
-					  	</div>
-					</a>
-				</div>
-				<div class="card col-lg-3 col-md-6 col-xs-12 cardReportes">
-					<a href="formularioTurnos.php">
-					  	<img src="../librerias/images/reportes.PNG" class="card-img-top" alt="...">
-					  	<div class="card-body">
-					    	<h5 class="card-title">Reportes</h5>
-					    	<p class="card-text">Toda la información del sistema</p>
-					  	</div>
-					</a>
-				</div>
-			</div>
+		<div class="col-lg-12 col-12 contenedor2">
+			<div class="card-group">
+			  	<div class="card">
+			    	<img class="card-img-top" src="../librerias/images/users.png"alt="Card image cap">
+			    	<div class="card-body">
+			      		<h5 class="card-title">Admin. usuarios</h5>
+			      		<p class="card-text">Administra los usuarios del sistema de información.</p>
+			    	</div>
+			  	</div>
+			  	<div class="card">
+			    	<img class="card-img-top" src="../librerias/images/productos.jpg" alt="Card image cap">
+			    	<div class="card-body">
+				      	<h5 class="card-title">Productos</h5>
+				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
+			    	</div>
+			  	</div>
+			  	<div class="card">
+			    	<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
+			    	<div class="card-body">
+				      	<h5 class="card-title">Bodega</h5>
+				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
+			    	</div>
+			  	</div>
+			  	<div class="card">
+			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
+			    	<div class="card-body">
+				      	<h5 class="card-title">Reportes</h5>
+				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
+			    	</div>
+			  	</div>
 		</div>
 	</div>
 
