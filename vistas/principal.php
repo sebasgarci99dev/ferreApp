@@ -28,7 +28,6 @@
 
 		.contenedorTarjetas {
 			display: flex;
-			/*justify-content: center;*/
 			text-align: center;
 			padding-top: 1rem;
 			overflow-x: auto;
@@ -93,6 +92,7 @@
 		}
 		.card-body {
 			color: black;
+			text-align: center;
 		}
 		.card-text {
 			color: black;
@@ -116,10 +116,8 @@
 	      	<ul>
 	      		<li>Hola <i><br><?php echo $user['Nombre'];?></li>
 	      		<li><?php echo $user['Apellido'];?></li> </i>
-	      		<br>
-	      		<li><?php echo $user['Email'];?></li>
-	      		<br>
-	      		<li><?php echo $user['Direccion'];?></li>
+	      		<li>- <?php echo $user['Email'];?></li>
+	      		<li>- <?php echo $user['Direccion'];?></li>
 	      	</ul>
 	      	<a href="../server/Clases/salir.php" >
 	  			<button id="btnCerrarSesion" class="btn btn-secondary">
@@ -128,10 +126,12 @@
 	  		</a>
 	    </div>
 
-		<div class="col-lg-12 col-12 contenedor2">
+		<div class="col-lg-12 col-12">
 			<div class="card-group">
 			  	<div class="card">
-			    	<img class="card-img-top" src="../librerias/images/users.png"alt="Card image cap">
+			  		<a href="adminUsuarios/adminUsuarios.php">
+			    		<img class="card-img-top" src="../librerias/images/users.png"alt="Card image cap">
+			    	</a>
 			    	<div class="card-body">
 			      		<h5 class="card-title">Admin. usuarios</h5>
 			      		<p class="card-text">Administra los usuarios del sistema de información.</p>
@@ -142,6 +142,13 @@
 			    	<div class="card-body">
 				      	<h5 class="card-title">Productos</h5>
 				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
+			    	</div>
+			  	</div>
+			  	<div class="card">
+			    	<img class="card-img-top" src="../librerias/images/pedidos.png" alt="Card image cap">
+			    	<div class="card-body">
+				      	<h5 class="card-title">Pedidos</h5>
+				      	<p class="card-text">Maneja todas las compras de tus clientes.</p>
 			    	</div>
 			  	</div>
 			  	<div class="card">
