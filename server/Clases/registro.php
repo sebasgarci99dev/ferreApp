@@ -39,8 +39,6 @@
 	$user = mysqli_fetch_array($resultado);
 
 	if($user['0'] != "") {
-		session_start();
-		$_SESSION['usuario'] = $user;
 		echo "0";
 	}else {
 		echo "1";

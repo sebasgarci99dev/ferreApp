@@ -43,13 +43,6 @@
 							Inicio de sesión
 						</button>
 					</div>
-
-					<div class="text-center w-full">
-						<a class="txt1" href="vistas/formularioRegistro.php">
-							Registrate!
-							<i class="fa fa-long-arrow-right"></i>	
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>
