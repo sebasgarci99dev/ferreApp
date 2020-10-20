@@ -84,7 +84,7 @@
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaUsuarios" class="display" style="width:100%">
+		<table id="tablaUsuarios" class="display table table-info table-striped dt-responsive nowrap" style="width:100%">
 	        <thead>
 	            <tr>
 	                <th>Cód. usuario</th>
@@ -133,6 +133,29 @@
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
 	        		<button type="button" class="btn btn-info d-none" id="btnEditarUsuario">Editar usuario</button>
 	        		<button type="button" class="btn btn-info" id="btnRegistrarUsuario">Crear usuario</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+
+	<!-- Modal para el cambio de contraseña -->
+	<div class="modal fade" id="modalCambioPass" tabindex="-1" role="dialog" aria-labelledby="modalCambioPassLabel" aria-hidden="true">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title tituloModalCambiarPass" id="titulo">Cambiar contraseña</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+					<input type="password" id="passAnt" name="passAnt" class="form-control" placeholder="Contraseña anterior" required>
+					<br>
+					<input type="password" id="passNueva" name="passNueva" class="form-control" placeholder="Contraseña nueva" required>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
+	        		<button type="button" class="btn btn-info" id="btnCambiarPass">Cambiar contraseña</button>
 	      		</div>
 	    	</div>
 	  	</div>
