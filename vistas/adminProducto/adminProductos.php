@@ -116,7 +116,6 @@
 	      		</div>
 	      		<div class="modal-body">
 	        		<!--<input type="number" id="idproducto" name="idproducto" class="form-control" placeholder="Codigo Producto" required> -->
-					<br>
 					<input type="text" id="nombrePrd" name="nombrePrd" class="form-control" placeholder="Nombre Producto" required>
 					<br>
 					<input type="text" id="descripcionPrd" name="descripcionPrd" class="form-control" placeholder="Descripción Producto" required>
@@ -128,13 +127,10 @@
 					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
 					<br>
 					<select id="estado" name="estado" class="form-control" required>
-					<option hidden selected>Estado</option>
-					<option value="0">Inactivo</option>
-					<option value="1">Activo</option>					
+					<option value="0" selected>Activo</option>
+					<option value="1">Inactivo</option>					
 					</select>
 					<br>			
-					<input type="date" id="fechaCreacionPrd" name="fechaCreacionPrd" class="form-control" placeholder="Fecha de Creacion" required>
-					<br>
 				  </div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>

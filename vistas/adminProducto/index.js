@@ -9,30 +9,24 @@ var idProducto;
 */
 // Evento para crear un usuario
 $("#btnRegistrarProducto").on("click", function (e) {
-	console.log("FUNCIONA EL BOTON DE  DE CREAR PRODUCTO");
-	//var idProducto = $("#idproducto").val();
-	var nombreprd = $("#nombrePrd").val();	
-	var descripcionPrd = $("#descripcionPrd").val();
-	var UM = $("#UM").val();
-	var EAN = $("#EAN").val();
-	var categoria = $("#categoria").val();
-	var estado = $("#estado").val();
-	var fechaCreacionPrd =  $("#fechaCreacionPrd").val();
+	var nombreprd 		= $("#nombrePrd").val();	
+	var descripcionPrd 	= $("#descripcionPrd").val();
+	var UM 				= $("#UM").val();
+	var EAN 			= $("#EAN").val();
+	var categoria 		= $("#categoria").val();
+	var estado 			= $("#estado").val();
 
 	var data = new FormData();
-	//data.append('idProducto', idProducto);
 	data.append('nombreprd', nombreprd);
 	data.append('descripcionPrd', descripcionPrd);
 	data.append('UM', UM);
 	data.append('EAN', EAN);
 	data.append('categoria', categoria);
 	data.append('estado', estado);
-	data.append('fechaCreacionPrd', fechaCreacionPrd);
 
 	// Servicio web
 	var solicitud = new XMLHttpRequest();
 	solicitud.open("POST", "../../server/Clases/registroProducto.php", true);
-	
 	solicitud.send(data);
 
 	solicitud.onreadystatechange = function () {
