@@ -66,16 +66,20 @@ $("#btnEditarProducto").on("click", function (e) {
 	var EAN = $("#EAN").val();
 	var categoria = $("#categoria").val();
 	var estado = $("#estado").val();
+	console.log("Ingresando al boton editar producto");
+	console.log(idProducto);
 
 	var data = new FormData();
+	data.append('idProducto', idProducto)
 	data.append('nombreprd', nombreprd);
 	data.append('descripcionPrd', descripcionPrd);
 	data.append('UM', UM);
 	data.append('EAN', EAN);
+
 	data.append('categoria', categoria);
 	data.append('estado', estado);
 
-
+	//console.log(data.values(nombreprd));
 	// Servicio web
 	var solicitud = new XMLHttpRequest();
 	solicitud.open("POST", "../../server/Clases/editarProducto.php", true);
@@ -84,6 +88,7 @@ $("#btnEditarProducto").on("click", function (e) {
 	solicitud.onreadystatechange = function () {
 		if (solicitud.readyState == 4) {
 			var respuesta = solicitud.responseText;
+			console.log("entrando al response de crear producto");
 			if (respuesta == 0) {
 				swal({
 					title: "FerreApp",
@@ -120,10 +125,10 @@ $("#modalProducto").on("hidden.bs.modal", function (e) {
 	});
 });
 
-// Funcion para editar producto
+// Funcion para editar producto FUNCIONANDO
 $(document).on('click', '.editPrd', function () {
 
-	idProducto= $(this).data('id');
+	idProducto = $(this).data('id');
 	console.log(idProducto);
 
 	var data = new FormData();
@@ -136,8 +141,10 @@ $(document).on('click', '.editPrd', function () {
 
 	solicitud.onreadystatechange = function () {
 		if (solicitud.readyState == 4) {
-			console.log("ingresandos solicitud onreadystatechange");
+			console.log("ingresando solicitud onreadystatechange");
 			var producto = JSON.parse(solicitud.responseText);
+			console.log(producto.nombre);
+			console.log(producto.estado);
 
 			$("#nombrePrd").val(producto.nombre);
 			$("#descripcionPrd").val(producto.descripcion);
@@ -145,6 +152,8 @@ $(document).on('click', '.editPrd', function () {
 			$("#EAN").val(producto.codigoBarras);
 			$("#categoria").val(producto.idCategoria);
 			$("#estado").val(producto.estado);
+
+			console.log(producto.codigoBarras);
 
 			//$("#pass").addClass('d-none');
 			//$("#tipoUsuario").addClass('d-none');
@@ -164,11 +173,11 @@ $(document).on('click', '.editPrd', function () {
 // Funcion para eliminar un usuario---Pendiente
 $(document).on('click', '.eliminarProducto', function () {
 
-	idUsuario = $(this).data('id');
+	idProducto = $(this).data('id');
 
 	swal({
 		title: "FerreApp",
-		text: "Estas seguro de eliminar el usuario con código: " + idUsuario,
+		text: "Estas seguro de eliminar permanentemente el producto con código: " + idProducto,
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
@@ -176,11 +185,11 @@ $(document).on('click', '.eliminarProducto', function () {
 		.then((event) => {
 			if (event) {
 				var data = new FormData();
-				data.append('idUsuario', idUsuario);
+				data.append('idProducto', idProducto);
 
 				// Servicio web
 				var solicitud = new XMLHttpRequest();
-				solicitud.open("POST", "../../server/Clases/eliminarUsuario.php", true);
+				solicitud.open("POST", "../../server/Clases/eliminarProducto.php", true);
 				solicitud.send(data);
 
 				solicitud.onreadystatechange = function () {
@@ -192,8 +201,8 @@ $(document).on('click', '.eliminarProducto', function () {
 								text: "Usuario eliminado correctamente!.",
 								icon: "success"
 							}).then(function () {
-								recargarTablaUsuarios(function () {
-									limpiarModalUsuario(function () {
+								iniciarTablaProductos(function () {
+									limpiarModalProducto(function () {
 									});
 								});
 							});
@@ -257,7 +266,7 @@ function iniciarTablaProductos(callback) {
 
 
 function recargarTablaProducto(callback) {
-	$("#tablaProducto").DataTable().ajax.reload();
+	$("#tablaProductos").DataTable().ajax.reload();
 	callback();
 }
 

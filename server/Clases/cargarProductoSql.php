@@ -9,7 +9,7 @@
 	require_once('conexion.php');
 
 	$idProducto = $_POST['idProducto'];
-	
+	//$idProducto=13;
 
 	// Consulta a la BD
 	$consulta = "
@@ -23,7 +23,9 @@
 		 u.estado, 
 		 u.fechaCreacion 
 		FROM producto u
-		WHERE u.idProducto = ".$idProducto;
+		WHERE u.idProducto = $idProducto";
+
+
 
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el producto');
 
