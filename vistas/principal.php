@@ -152,14 +152,16 @@
 			    	</div>
 			  	</div>
 			  	<div class="card">
-			    	<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
+			  		<a href="bodega/bodega.php">
+			    		<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
+			    	</a>
 			    	<div class="card-body">
 				      	<h5 class="card-title">Bodega</h5>
 				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
 			    	</div>
 			  	</div>
 			  	<div class="card">
-			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
+			    		<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
 			    	<div class="card-body">
 				      	<h5 class="card-title">Reportes</h5>
 				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
