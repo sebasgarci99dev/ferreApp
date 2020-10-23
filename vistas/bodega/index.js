@@ -112,17 +112,16 @@ function iniciarTablaPedidos(callback) {
     	},
         "columns": [
             {"data" : "idPedido"},
-			{"data" : "idCliente"},
+			{"data" : "cliente"},
+			{"data" : "email"},
 			{"data" : "fechaPedido"},
-			{"data" : "fechaEnvio"},
-			{"data" : "idDepto"},
-			{"data" : "idCiudad"},
+			{"data" : "nombre_depto"},
+			{"data" : "nombre_ciudad"},
 			{"data" : "direccion"},
-			{"data"	: "idEstadoPedido",
-            {"data" : "descripcion",
-
+			{"data"	: "estado"},
+            {"data" : "idPedido",
 				render : function(data, type, row) {
-					var html = '<i id="editUsuario" data-id='+data+' class="far fa-edit fa-2x editarUsuario" ></i>'
+					var html = '<i id="editarPedido" data-id='+data+' class="far fa-edit fa-2x editarPedido" ></i>'
 					return html;
 				}
 			}        
