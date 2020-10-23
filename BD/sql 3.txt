@@ -1,0 +1,27 @@
+CREATE TABLE `modulo` (
+	`idModulo` INT NOT NULL AUTO_INCREMENT,
+	`nombre_modulo` VARCHAR(50) NULL DEFAULT NULL,
+	`estado` INT NULL DEFAULT 0,
+	PRIMARY KEY (`idModulo`)
+)
+COMMENT='Modulos del sistema de informacion'
+COLLATE='utf8mb4_general_ci'
+;
+
+INSERT INTO modulo (nombre_modulo) VALUES ('Admin. usuarios');
+INSERT INTO modulo (nombre_modulo) VALUES ('Productos');
+INSERT INTO modulo (nombre_modulo) VALUES ('Clientes');
+INSERT INTO modulo (nombre_modulo) VALUES ('Pedidos');
+INSERT INTO modulo (nombre_modulo) VALUES ('Bodega');
+INSERT INTO modulo (nombre_modulo) VALUES ('Reportes');
+
+CREATE TABLE `permiso_modulo` (
+	`idTipoUsuario` INT(11) NULL DEFAULT NULL,
+	`idModulo` INT(11) NULL DEFAULT NULL
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
+
+
+

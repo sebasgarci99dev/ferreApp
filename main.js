@@ -19,10 +19,15 @@
         return check;
     });
 
-
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
            hideValidate(this);
+        });
+    });
+
+    $(document).ready(function() {
+        validarModulosUsuario(function() {
+
         });
     });
 
@@ -49,6 +54,24 @@
         }
 
     });
+
+    function validarModulosUsuario(callback) {
+        // Servicio web
+        var solicitud = new XMLHttpRequest();
+        solicitud.open("POST", "../server/Clases/validarSesion.php", true);
+        solicitud.send();
+
+        solicitud.onreadystatechange = function() {
+            if(solicitud.readyState == 4) {
+                var respuesta = JSON.parse(solicitud.responseText);
+                if(respuesta.idTipoUsuario == 2) {
+                    $(".cardAdminUsers").hide();
+                    $(".cardBodega").hide();
+                    $(".cardReportes").hide();
+                }
+            }
+        }
+    }
 
     function validate (input) {
         if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
