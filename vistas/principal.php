@@ -138,7 +138,9 @@
 			    	</div>
 			  	</div>
 			  	<div class="card">
+				  <a href="adminProducto/adminProductos.php">
 			    	<img class="card-img-top" src="../librerias/images/productos.jpg" alt="Card image cap">
+				</a>	
 			    	<div class="card-body">
 				      	<h5 class="card-title">Productos</h5>
 				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
