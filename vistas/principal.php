@@ -37,15 +37,6 @@
 			margin: 1rem;
 		}
 
-		.cardProductos, 
-		.cardBodega, 
-		.cardReportes {
-			cursor: pointer;
-			border-radius: 1.5rem;
-			background-color: #c5c5c5;
-			color: black; 
-		}
-
 		#menuUsuario {
 			display: none;
 			margin-top: 1.1%;
@@ -128,7 +119,7 @@
 
 		<div class="col-lg-12 col-12">
 			<div class="card-group">
-			  	<div class="card">
+			  	<div class="card cardAdminUsers">
 			  		<a href="adminUsuarios/adminUsuarios.php">
 			    		<img class="card-img-top" src="../librerias/images/users.png"alt="Card image cap">
 			    	</a>
@@ -137,28 +128,28 @@
 			      		<p class="card-text">Administra los usuarios del sistema de información.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card">
+			  	<div class="card cardProductos">
 			    	<img class="card-img-top" src="../librerias/images/productos.jpg" alt="Card image cap">
 			    	<div class="card-body">
 				      	<h5 class="card-title">Productos</h5>
 				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card">
+			  	<div class="card cardPedidos">
 			    	<img class="card-img-top" src="../librerias/images/pedidos.png" alt="Card image cap">
 			    	<div class="card-body">
 				      	<h5 class="card-title">Pedidos</h5>
 				      	<p class="card-text">Maneja todas las compras de tus clientes.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card">
+			  	<div class="card cardBodega">
 			    	<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
 			    	<div class="card-body">
 				      	<h5 class="card-title">Bodega</h5>
 				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card">
+			  	<div class="card cardReportes">
 			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
 			    	<div class="card-body">
 				      	<h5 class="card-title">Reportes</h5>
