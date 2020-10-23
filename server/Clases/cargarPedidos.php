@@ -12,19 +12,23 @@
 	$consulta = "
 		SELECT 
 			p.idPedido,
-			cl.idCliente,
+			concat(cl.nombres, ' ',cl.apellidos) as cliente,
+		    cl.email,
 			p.fechaPedido,
-			p.fechaEnvio,
 			d.nombre_depto,
 			c.nombre_ciudad,
-			p.direccion
-			e.estado,
-			p.descripcion
+			p.direccion,
+			e.estado
 		FROM pedidos p 
-		JOIN clientes cl ON cl.idCliente = p.idCliente
-		JOIN departamentos d ON d.idDepto = p.idDepto
-		JOIN ciudad c ON c.idCiudad = p.idCiudad
-		JOIN estadopedido e ON e.idEstadoPedido = p.idEstadoPedido";
+		JOIN clientes cl 
+			ON cl.idCliente = p.idCliente
+		    AND cl.estado = 0
+		JOIN departamentos d 
+			ON d.idDepto = p.idDepto
+		JOIN ciudad c 
+			ON c.idCiudad = p.idCiudad
+		JOIN estadopedido e 
+			ON e.idEstadoPedido = p.idEstadoPedido";
 
 
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');

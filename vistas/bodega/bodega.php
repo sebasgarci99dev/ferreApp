@@ -66,6 +66,10 @@
 		#tablaUsuarios thead th {
 		    text-align: center;
 		}
+
+		#btnIngresoProduto {
+			margin-left: 0.5rem;
+		}
 	</style>
 <body>
 	<div class="sidebar-menu">
@@ -81,9 +85,6 @@
 	<br>
 	<div class="col-lg-12 col-12 d-flex flex-row-reverse">
 		<button class="btn btn-lg btn-info" id="btnIngresoProduto" data-toggle="modal" data-target="#modalIngreso">Ingreso</button>
-	</div>
-	<br>
-	<div class="col-lg-12 col-12 d-flex flex-row-reverse">
 		<button class="btn btn-lg btn-info" id="btnRetiroProducto" data-toggle="modal" data-target="#modalRetiro">Retiro</button>
 	</div>
 	<br>
@@ -91,15 +92,15 @@
 		<table id="tablaPedidos" class="display table table-info table-striped dt-responsive nowrap" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>Pedido</th>
+	                <th>Cód. pedido</th>
 					<th>Cliente</th>
+					<th>Email</th>
 					<th>Fecha Pedido</th>
-					<th>Fecha Envio</th>
 					<th>Departamento</th>
 					<th>Ciudad</th>
 					<th>Dirección</th>
 					<th>Estado Pedido</th>
-					<th>Descripción</th>
+					<th>Opciones</th>
 	            </tr>
 	        </thead>
 	        <tbody>
