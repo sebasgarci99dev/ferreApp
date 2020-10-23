@@ -95,6 +95,7 @@
 					<th>Categoria</th>
 					<th>Estado</th>
 					<th>Fecha de Creación</th>
+					<th>Opciones</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -127,8 +128,9 @@
 					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
 					<br>
 					<select id="estado" name="estado" class="form-control" required>
-					<option value="0" selected>Activo</option>
-					<option value="1">Inactivo</option>					
+					<option disabled selected>Selecciona un Estado</option>
+					<option value="1" selected>Activo</option>
+					<option value="0">Inactivo</option>					
 					</select>
 					<br>			
 				  </div>

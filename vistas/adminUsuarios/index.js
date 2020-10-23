@@ -72,6 +72,7 @@ $("#modalUsuario").on("hidden.bs.modal", function (e) {
 $(document).on('click', '.editarUsuario', function() { 
 	
 	idUsuario = $(this).data('id');
+	console.log(idUsuario);
 
 	var data = new FormData();
 	data.append('idUsuario', idUsuario);

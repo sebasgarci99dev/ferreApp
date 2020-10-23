@@ -2,7 +2,7 @@
 	require_once('conexion.php');
 
 	//$idproducto	= $_POST["idproducto"];
-	$nombreprd		= $_POST["nombreprd"];
+	$nombreprd		=  strtoupper( $_POST["nombreprd"]);
 	$descripcionprd	= $_POST["descripcionPrd"];
 	$unidadmedida 	= $_POST["UM"];
 	$codigobarras 	= $_POST["EAN"];
