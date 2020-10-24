@@ -16,10 +16,10 @@
 	$consulta = "
 		SELECT * 
 		FROM usuario 
-		WHERE email='$usuario' 
-		AND contrasena = '$clave'";
-	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
-
+		WHERE email='".$usuario."'
+		AND contrasena = '".$clave."'
+		and borrado = 0";
+	$resultado = mysqli_query($conexion, $consulta);
 	$user = mysqli_fetch_array($resultado);
 	
 	// Validación si la BD responde algun dato

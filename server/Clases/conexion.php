@@ -2,7 +2,7 @@
 	$servidor = "localhost";
 	$usuario = "user_developer";
 	$clave = "1a2b3c";
-	$based = "ferreApp";
+	$based = "ferreapp";
 	
 	$conexion = mysqli_connect($servidor, $usuario, $clave) or die('No se conecto al servidor');
 	

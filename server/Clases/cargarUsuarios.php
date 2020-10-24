@@ -21,7 +21,8 @@
 		FROM usuario u 
 		JOIN tipo_usuario tp 
 			ON tp.idTipoUsuario = u.idTipoUsuario
-		WHERE u.borrado = 0;";
+		WHERE u.borrado = 0
+			and u.idTipoUsuario <> 1;";
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
 
 	// Recorremos a los usuarios

@@ -15,8 +15,8 @@
 			concat(cl.nombres, ' ',cl.apellidos) as cliente,
 		    cl.email,
 			p.fechaPedido,
-			d.nombre_depto,
-			c.nombre_ciudad,
+			d.dep_nombre,
+			m.mun_nombre,
 			p.direccion,
 			e.estado
 		FROM pedidos p 
@@ -24,9 +24,9 @@
 			ON cl.idCliente = p.idCliente
 		    AND cl.estado = 0
 		JOIN departamentos d 
-			ON d.idDepto = p.idDepto
-		JOIN ciudad c 
-			ON c.idCiudad = p.idCiudad
+			ON d.id = p.idDepto
+		JOIN municipios m
+			ON m.id = p.idCiudad
 		JOIN estadopedido e 
 			ON e.idEstadoPedido = p.idEstadoPedido";
 
