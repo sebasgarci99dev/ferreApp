@@ -33,10 +33,6 @@
 			overflow-x: auto;
 		}
 
-		.card {
-			margin: 1rem;
-		}
-
 		#menuUsuario {
 			display: none;
 			margin-top: 1.1%;
@@ -73,6 +69,14 @@
 			height: 100%;
 			position: absolute;
 			filter: contrast(0.5);
+		}
+
+		.card {
+			height: 28rem;
+			margin: 1rem;
+		}
+		.card img {
+			object-fit: contain;
 		}
 
 		.card-img-top {
@@ -118,7 +122,8 @@
 	    </div>
 
 		<div class="col-lg-12 col-12">
-			<div class="card-group">
+			<!-- <div class="card-group"> -->
+			<div class="card-columns">
 			  	<div class="card cardAdminUsers">
 			  		<a href="adminUsuarios/adminUsuarios.php">
 			    		<img class="card-img-top" src="../librerias/images/users.png"alt="Card image cap">
@@ -126,15 +131,6 @@
 			    	<div class="card-body">
 			      		<h5 class="card-title">Admin. usuarios</h5>
 			      		<p class="card-text">Administra los usuarios del sistema de información.</p>
-			    	</div>
-			  	</div>
-			  	<div class="card cardProductos">
-			  		<a href="adminProducto/adminProductos.php">
-			    		<img class="card-img-top" src="../librerias/images/productos.jpg" alt="Card image cap">
-			    	</a>
-			    	<div class="card-body">
-				      	<h5 class="card-title">Productos</h5>
-				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
 			    	</div>
 			  	</div>
 			  	<div class="card cardPedidos">
@@ -146,6 +142,15 @@
 				      	<p class="card-text">Maneja todas las compras de tus clientes.</p>
 			    	</div>
 			  	</div>
+			  	<div class="card cardProductos">
+			  		<a href="adminProducto/adminProductos.php">
+			    		<img class="card-img-top" src="../librerias/images/productos.jpg" alt="Card image cap">
+			    	</a>
+			    	<div class="card-body">
+				      	<h5 class="card-title">Productos</h5>
+				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
+			    	</div>
+			  	</div>
 			  	<div class="card cardBodega">
 			  		<a href="bodega/bodega.php">
 			    		<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
@@ -155,6 +160,15 @@
 				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
 			    	</div>
 			  	</div>
+			  	<div class="card cardClientes">
+			  		<a href="adminClientes/adminClientes.php">
+			    		<img class="card-img-top" src="../librerias/images/clientes.png" alt="Card image cap">
+			    	</a>
+			    	<div class="card-body">
+				      	<h5 class="card-title">Clientes</h5>
+				      	<p class="card-text">Atiende aquí a tus compradores.</p>
+			    	</div>
+			  	</div>
 			  	<div class="card cardReportes">
 			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
 			    	<div class="card-body">
@@ -162,9 +176,9 @@
 				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
 			    	</div>
 			  	</div>
+			</div>
 		</div>
 	</div>
-
 	<script src="../librerias/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../librerias/js/bootstrap/js/popper.js"></script>
 	<script src="../librerias/js/bootstrap/js/bootstrap.min.js"></script>
