@@ -13,13 +13,13 @@
 
 	$str2 = "
 		SELECT *
-		FROM producto
-		WHERE idProducto = '".$idProducto."';
+		FROM producto;
+		
 	";
-    $resultado = mysqli_query($conexion, $str2) or die('no se consulto el usuario');
+    $resultado = mysqli_query($conexion, $str2) or die('no se consultó producto');
     
     $producto = mysqli_fetch_array($resultado); 
     
-    
+
     
     ?>
