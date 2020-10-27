@@ -11,26 +11,30 @@ $(document).ready(function() {
 
 // Evento para crear un Cliente
 $("#btnRegistrarCliente").on("click", function(e) {
-	var email 			= $("#email").val();
-	var pass 			= $("#pass").val();
-	var nombre 			= $("#nombre").val();
-	var apellido 		= $("#apellido").val();
-	var direccion 		= $("#direccion").val();
-	var telefono 		= $("#telefono").val();
-	var tipoCliente 	= $("#tipoCliente").val();
+	var codigo 		= 	$("#codigo").val();
+	var nombre 		= 	$("#nombre").val();
+	var apellido 	= 	$("#apellido").val();
+	var direccion 	= 	$("#direccion").val();
+	var tel_fijo 	= 	$("#tel_fijo").val();
+	var tel_cel 	= 	$("#tel_cel").val();
+	var email 		= 	$("#email").val();
+	var selectDepto = 	$("#selectDepto").selectpicker('val');
+	var selectMunic = 	$("#selectMunic").selectpicker('val');
 
 	var data = new FormData();
-	data.append('email', email);
-	data.append('pass', pass);
+	data.append('codigo', codigo);
 	data.append('nombre', nombre);
 	data.append('apellido', apellido);
 	data.append('direccion', direccion);
-	data.append('telefono', telefono);
-	data.append('tipoCliente', tipoCliente);
+	data.append('tel_fijo', tel_fijo);
+	data.append('tel_cel', tel_cel);
+	data.append('email', email);
+	data.append('selectDepto', selectDepto);
+	data.append('selectMunic', selectMunic);
 
 	// Servicio web
     var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/registro.php", true);
+    solicitud.open("POST", "../../server/Clases/registroCliente.php", true);
     solicitud.send(data);
 
     solicitud.onreadystatechange = function() {
@@ -73,7 +77,7 @@ $("#modalCliente").on("hidden.bs.modal", function (e) {
 });
 
 // Funcion para editar Cliente
-$(document).on('click', '.editarCliente', function() { 
+$(document).on('click', '.editarCliente', function(e) { 
 	
 	idCliente = $(this).data('id');
 	console.log(idCliente);
@@ -88,21 +92,29 @@ $(document).on('click', '.editarCliente', function() {
 
     solicitud.onreadystatechange = function() {
         if(solicitud.readyState == 4) {
-        	var Cliente = JSON.parse(solicitud.responseText);
+        	var cliente = JSON.parse(solicitud.responseText);
         	
-        	$("#email").val(Cliente.Email);
-			$("#nombre").val(Cliente.Nombre);
-			$("#apellido").val(Cliente.Apellido);
-			$("#direccion").val(Cliente.Direccion);
-			$("#telefono").val(Cliente.Telefono);
+        	$("#codigo").val(cliente.codigo);
+			$("#nombre").val(cliente.nombres);
+			$("#apellido").val(cliente.apellidos);
+			$("#direccion").val(cliente.direccion);
+			$("#tel_fijo").val(cliente.telefono_fijo);
+			$("#tel_cel").val(cliente.telefono_cel);
+			$("#email").val(cliente.email);
 
-			$("#pass").addClass('d-none');
-			$("#tipoCliente").addClass('d-none');
+			$("#selectDepto").selectpicker('val', cliente.idDepto);
+			e.stopPropagation();
+
+			cargarSelectMunic(cliente.idDepto, function() {
+				$("#selectMunic").selectpicker('val', cliente.idMun);
+			});
+
 			$("#btnRegistrarCliente").addClass('d-none');
 			$(".tituloModalCrear").addClass('d-none');
 			$(".tituloModalEditar").removeClass('d-none');
 			$("#btnEditarCliente").removeClass('d-none');
 			
+
 			$("#modalCliente").modal('show')
         }
     }
@@ -110,19 +122,27 @@ $(document).on('click', '.editarCliente', function() {
 
 // Evento para editar el Cliente
 $("#btnEditarCliente").on("click", function(e) {
-	var email 			= $("#email").val();
-	var nombre 			= $("#nombre").val();
-	var apellido 		= $("#apellido").val();
-	var direccion 		= $("#direccion").val();
-	var telefono 		= $("#telefono").val();
+	var codigo 		= 	$("#codigo").val();
+	var nombre 		= 	$("#nombre").val();
+	var apellido 	= 	$("#apellido").val();
+	var direccion 	= 	$("#direccion").val();
+	var tel_fijo 	= 	$("#tel_fijo").val();
+	var tel_cel 	= 	$("#tel_cel").val();
+	var email 		= 	$("#email").val();
+	var selectDepto = 	$("#selectDepto").selectpicker('val');
+	var selectMunic = 	$("#selectMunic").selectpicker('val');
 
 	var data = new FormData();
 	data.append('idCliente', idCliente);
-	data.append('email', email);
+	data.append('codigo', codigo);
 	data.append('nombre', nombre);
 	data.append('apellido', apellido);
 	data.append('direccion', direccion);
-	data.append('telefono', telefono);
+	data.append('tel_fijo', tel_fijo);
+	data.append('tel_cel', tel_cel);
+	data.append('email', email);
+	data.append('selectDepto', selectDepto);
+	data.append('selectMunic', selectMunic);
 
 	// Servicio web
     var solicitud = new XMLHttpRequest();
@@ -220,20 +240,20 @@ function iniciarTablaClientes(callback) {
     		"url" : "../../server/Clases/cargarClientes.php"
     	},
         "columns": [
-            {"data" : "idCliente"},
-			{"data" : "Email"},
-			{"data" : "Nombre"},
-			{"data" : "Apellido"},
-			{"data" : "Direccion"},
-			{"data" : "Telefono"},
-			{"data" : "tipoCliente"},
+        	{"data"	: "idCliente"},
+            {"data" : "codigo"},
+			{"data" : "nombre"},
+			{"data" : "email"},
+			{"data" : "direccion"},
+			{"data" : "telefono_cel"},
+			{"data" : "telefono_fijo"},
+			{"data" : "dep_nombre"},
+			{"data" : "mun_nombre"},
 			{"data"	: "idCliente",
 				render : function(data, type, row) {
-					var html = '<i id="editCliente" data-id='+data+' class="far fa-edit fa-2x editarCliente" ></i>';
+					var html = '<i data-id='+data+' class="far fa-edit fa-2x editarCliente" ></i>';
 						html += ' | '
 						html += '<i class="far fa-trash-alt fa-2x eliminarCliente" data-id='+data+'></i>'
-						html += ' | '
-						html += '<i class="fas fa-key fa-2x cambiarPass" data-id='+data+'></i>'
 					return html;
 				}
 			}        

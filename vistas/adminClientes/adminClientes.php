@@ -91,12 +91,15 @@
 		<table id="tablaClientes" class="display table table-info table-striped dt-responsive nowrap" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>Cód. cliente</th>
-					<th>Email</th>
+	            	<th>Id. Client</th>
+	                <th>Ident.</th>
 					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Direccion</th>
-					<th>Telefono</th>
+					<th>E-mail</th>
+					<th>Dirección</th>
+					<th>Tel. cel</th>
+					<th>Tel. fijo</th>
+					<th>Depart.</th>
+					<th>Municipio</th>
 					<th>Opciones</th>
 	            </tr>
 	        </thead>
