@@ -1,31 +1,25 @@
-var idProducto;
+var idUnidadMedida;
 
 $(document).ready(function () {
-	iniciarTablaProductos(function () {
+	iniciarTablaUnidad(function () {
 
 	});
 });
 
-// Evento para crear un producto
-$("#btnRegistrarProducto").on("click", function (e) {
-	var nombreprd = $("#nombrePrd").val();
-	var descripcionPrd = $("#descripcionPrd").val();
-	var UM = $("#UM").val();
-	var EAN = $("#EAN").val();
-	var categoria = $("#categoria").val();
-	var estado = $("#estado").val();
+// Evento para crear unidad de Medida
+$("#btnRegistrarUM").on("click", function (e) {
+	var unidadMedida = $("#siglaUM").val();
+	var descripcionUnidad= $("#nombreUM").val();
+	
 
 	var data = new FormData();
-	data.append('nombreprd', nombreprd);
-	data.append('descripcionPrd', descripcionPrd);
-	data.append('UM', UM);
-	data.append('EAN', EAN);
-	data.append('categoria', categoria);
-	data.append('estado', estado);
+	data.append('unidadMedida', unidadMedida);
+	data.append('descripcionUnidad', descripcionUnidad);
+	
 
 	// Servicio web
 	var solicitud = new XMLHttpRequest();
-	solicitud.open("POST", "../../server/Clases/registroProducto.php", true);
+	solicitud.open("POST", "../../server/Clases/registroUM.php", true);
 	solicitud.send(data);
 
 	solicitud.onreadystatechange = function () {
@@ -35,12 +29,12 @@ $("#btnRegistrarProducto").on("click", function (e) {
 
 				swal({
 					title: "FerreApp",
-					text: "Producto Creado Correctamente!.",
+					text: "unidad Creada Correctamente!.",
 					icon: "success"
 				}).then(function () {
-					recargarTablaProducto(function () {
-						$("#modalProducto").modal('hide');
-						limpiarModalProducto(function () {
+					recargarTablaUnidad(function () {
+						$("#modalUM").modal('hide');
+						limpiarModalUnidad(function () {
 
 						});
 					});
@@ -48,7 +42,7 @@ $("#btnRegistrarProducto").on("click", function (e) {
 			} else {
 				swal(
 					"FerreApp",
-					"Hubo un problema con la creación del producto, comuniquese con el administrador.",
+					"Hubo un problema con la creación de la unidad de medida, comuniquese con el administrador.",
 					"error"
 				);
 			}
@@ -59,15 +53,10 @@ $("#btnRegistrarProducto").on("click", function (e) {
 
 
 // Evento para editar el producto
-$("#btnEditarProducto").on("click", function (e) {
-	var nombreprd = $("#nombrePrd").val();
-	var descripcionPrd = $("#descripcionPrd").val();
-	var UM = $("#UM").val();
-	var EAN = $("#EAN").val();
-	var categoria = $("#categoria").val();
-	var estado = $("#estado").val();
-	console.log("Ingresando al boton editar producto");
-	console.log(idProducto);
+$("#btnEditarUM").on("click", function (e) {
+	var unidadMedida = $("#siglaUM").val();
+	var descripcionUnidad = $("#nombreUM").val();
+
 
 	var data = new FormData();
 	data.append('idProducto', idProducto)
@@ -170,10 +159,10 @@ $(document).on('click', '.editPrd', function () {
 
 
 
-// Funcion para eliminar un producto funcionando
-$(document).on('click', '.eliminarProducto', function () {
+// Funcion para eliminar unidad de Medida
+$(document).on('click', '.eliminarUnidad', function () {
 
-	idProducto = $(this).data('id');
+	idUnidadMedida = $(this).data('id');
 
 	swal({
 		title: "FerreApp",
@@ -185,17 +174,17 @@ $(document).on('click', '.eliminarProducto', function () {
 		.then((event) => {
 			if (event) {
 				var data = new FormData();
-				data.append('idProducto', idProducto);
+				data.append('idUnidadMedida', idUnidadMedida);
 
 				// Servicio web
 				var solicitud = new XMLHttpRequest();
-				solicitud.open("POST", "../../server/Clases/eliminarProducto.php", true);
+				solicitud.open("POST", "../../server/Clases/eliminarUM.php", true);
 				solicitud.send(data);
 				if (solicitud.readyState == 1) {
 
 					swal({
 						title: "FerreApp",
-						text: "Prodcuto  eliminado correctamente!.",
+						text: "Unidad de Medida Eliminada Correctamente!.",
 						icon: "success",
 					}).then((event) => {
 
@@ -208,7 +197,7 @@ $(document).on('click', '.eliminarProducto', function () {
 				else {
 					swal({
 						title: "FerreApp",
-						text: "Producto  no fue eliminado, favor contacte al administrador del sistema!.",
+						text: "Unidad de Medida no eliminada, favor contacte al administrador del sistema!.",
 						icon: "warning"
 					});
 
@@ -225,31 +214,27 @@ $(document).on('click', '.eliminarProducto', function () {
 
 
 //FUnciona OK
-function iniciarTablaProductos(callback) {
+function iniciarTablaUnidad(callback) {
 
 	console.log("ingresa a la funcion iniciar tabla producto");
-	$("#tablaProductos").DataTable({
+	$("#tablaUnidadMedida").DataTable({
 		"ajax": {
 			"method": "POST",
-			"url": "../../server/Clases/cargarProductosTabla.php"
+			"url": "../../server/Clases/cargarUMTabla.php"
 
 		},
 
 		"columns": [
-			{ "data": "idProducto" },
-			{ "data": "nombre" },
-			{ "data": "descripcion" },
 			{ "data": "idUnidadMedida" },
-			{ "data": "codigoBarras" },
-			{ "data": "idCategoria" },
-			{ "data": "estado" },
-			{ "data": "fechaCreacion" },
+			{ "data": "unidadMedida" },
+			{ "data": "descripcionUnidad" },
+		
 			{
-				"data": "idProducto",
+				"data": "idUnidadMedida",
 				render: function (data, type, row) {
-					var html = '<i id="editProducto" data-id=' + data + ' class="far fa-edit fa-2x editPrd" ></i>';
+					var html = '<i id="editUnidad" data-id=' + data + ' class="far fa-edit fa-2x editUnidad" ></i>';
 					html += ' | '
-					html += '<i class="far fa-trash-alt fa-2x eliminarProducto" data-id=' + data + '></i>'
+					html += '<i class="far fa-trash-alt fa-2x eliminarUnidad" data-id=' + data + '></i>'
 					return html;
 				}
 			}
@@ -264,22 +249,18 @@ function iniciarTablaProductos(callback) {
 
 
 
-function recargarTablaProducto(callback) {
-	$("#tablaProductos").DataTable().ajax.reload();
+function recargarTablaUnidad(callback) {
+	$("#tablaUnidadMedida").DataTable().ajax.reload();
 	console.log("Se recargó la tabla");
 	callback();
 }
 
 
 
-function limpiarModalProducto(callback) {
+function limpiarModalUnidad(callback) {
 	// Limpiamos los datos del modal
-	$("#nombrePrd").val("");
-	$("#descripcionPrd").val("");
-	$("#UM").val("");
-	$("#EAN").val("");
-	$("#categoria").val("");
-	$("#estado").val("Selecciona un Estado");
+	$("#siglaUM").val("");
+	$("#nombreUM").val("");
 	callback();
 }
 

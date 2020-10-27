@@ -79,21 +79,8 @@
 	  	</nav>
 	</div>
 	<br>
-	<div
-	 class="col-lg-12 col-12 d-flex flex-row-reverse">
-	 
-	 	<button class="btn btn-lg btn-info" id="btnPrecios" data-toggle="modal" data-target="#modalPrecios">Precios</button>
-		 &nbsp;
-	 	<button class="btn btn-lg btn-info" id="btnStock" data-toggle="modal" data-target="#modalStock">Stock</button>
-		 &nbsp;
-		<button class="btn btn-lg btn-info" id="btnCategorias" data-toggle="modal" data-target="#modalCategorias">Categorias</button>
-		 &nbsp;
-		 <a href="adminUM.php" >
-		   	<button class="btn btn-lg btn-info" id="btnUnidadMedida" type="button">Unidad de Medida  </button>
-	    </a>
-		&nbsp;
+	<div class="col-lg-12 col-12 d-flex flex-row-reverse">
 		<button class="btn btn-lg btn-info" id="btnCrearProducto" data-toggle="modal" data-target="#modalProducto">Crear Producto</button>
-		
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
@@ -116,7 +103,7 @@
 	    </table>
 	</div>
 
-	<!-- Modal de Creacion de Productos -->
+	<!-- Modal de Creacion de usuarios -->
 	<!-- Modal -->
 	<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="modalProductoLabel" aria-hidden="true">
 	  	<div class="modal-dialog" role="document">
@@ -141,7 +128,7 @@
 					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
 					<br>
 					<select id="estado" name="estado" class="form-control" required>
-					<option selected disabled >Selecciona un Estado</option>
+					<option disabled selected>Selecciona un Estado</option>
 					<option value="1" selected>Activo</option>
 					<option value="0">Inactivo</option>					
 					</select>
@@ -155,8 +142,6 @@
 	    	</div>
 	  	</div>
 	</div>
-
-
 
 	<script src="../../librerias/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../../librerias/js/bootstrap/js/popper.js"></script>

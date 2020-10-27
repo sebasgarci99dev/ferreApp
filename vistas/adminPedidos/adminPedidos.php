@@ -74,40 +74,29 @@
 		    	<button class="btn btn-info" id="volverMenu" type="button"> Volver </button>
 	    	</a>
 	    	<div class="col-11 d-flex justify-content-center" style="color: black;">
-	    		<h1> FerreApp > Admin. Productos</h1>
+	    		<h1> FerreApp > Admin. Pedidos</h1>
 	    	</div>
 	  	</nav>
 	</div>
 	<br>
-	<div
-	 class="col-lg-12 col-12 d-flex flex-row-reverse">
-	 
-	 	<button class="btn btn-lg btn-info" id="btnPrecios" data-toggle="modal" data-target="#modalPrecios">Precios</button>
-		 &nbsp;
-	 	<button class="btn btn-lg btn-info" id="btnStock" data-toggle="modal" data-target="#modalStock">Stock</button>
-		 &nbsp;
-		<button class="btn btn-lg btn-info" id="btnCategorias" data-toggle="modal" data-target="#modalCategorias">Categorias</button>
-		 &nbsp;
-		 <a href="adminUM.php" >
-		   	<button class="btn btn-lg btn-info" id="btnUnidadMedida" type="button">Unidad de Medida  </button>
-	    </a>
-		&nbsp;
-		<button class="btn btn-lg btn-info" id="btnCrearProducto" data-toggle="modal" data-target="#modalProducto">Crear Producto</button>
-		
+	<div class="col-lg-12 col-12 d-flex flex-row-reverse">
+		<button class="btn btn-lg btn-info" id="btnCrearPedidos" data-toggle="modal" data-target="#modalPedido">Nuevo pedido</button>
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaProductos" class="display" style="width:100%">
+		<table id="tablaPedidos" class="display" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>ID Producto</th>
-					<th>Nombre</th>
-					<th>Descripcion</th>
-					<th>UM</th>
-					<th>Cod. Barras</th>
-					<th>Categoria</th>
+	                <th>Cód. pedido</th>
+					<th>Cliente</th>
+					<th>FechaPedido</th>
+					<th>FechaEnvio</th>
+					<th>Departamento</th>
+					<th>Ciudad</th>
+					<th>Direccion</th>
+					<th>Producto</th>
+					<th>Cantidad</th>
 					<th>Estado</th>
-					<th>Fecha de Creación</th>
 					<th>Opciones</th>
 	            </tr>
 	        </thead>
@@ -116,47 +105,45 @@
 	    </table>
 	</div>
 
-	<!-- Modal de Creacion de Productos -->
+	<!-- Modal de Creacion de pedidos -->
 	<!-- Modal -->
-	<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="modalProductoLabel" aria-hidden="true">
+	<div class="modal fade" id="modalPedido" tabindex="-1" role="dialog" aria-labelledby="modalPedidoLabel" aria-hidden="true">
 	  	<div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title tituloModalCrear" id="titulo">Crear Producto</h5>
-	        		<h5 class="d-none modal-title tituloModalEditar" id="titulo">Editar Producto</h5>
+	        		<h5 class="modal-title tituloModalCrear" id="titulo">Crear Pedido</h5>
+	        		<h5 class="d-none modal-title tituloModalEditar" id="titulo">Editar Pedido</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-	        		<!--<input type="number" id="idproducto" name="idproducto" class="form-control" placeholder="Codigo Producto" required> -->
-					<input type="text" id="nombrePrd" name="nombrePrd" class="form-control" placeholder="Nombre Producto" required>
+	        		<input type="text" id="idcliente" name="idcliente" class="form-control" placeholder="Cliente" required>
 					<br>
-					<input type="text" id="descripcionPrd" name="descripcionPrd" class="form-control" placeholder="Descripción Producto" required>
+					<input type="date" id="fechapedido" name="fechapedido" class="form-control" placeholder="" required>
 					<br>
-					<input type="text" id="UM" name="UM" class="form-control" placeholder="Unidad de Medida" required>
+					<input type="date" id="fechaenvio" name="fechaenvio" class="form-control" placeholder="" required>
 					<br>
-					<input type="number" id="EAN" name="EAN" class="form-control" placeholder="Codigo de Barras" required>
+					<input type="text" id="departamento" name="departamento" class="form-control" placeholder="Departamento" required>
 					<br>
-					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
+					<input type="text" id="ciudad" name="ciudad" class="form-control" placeholder="Municipio" required>
 					<br>
-					<select id="estado" name="estado" class="form-control" required>
-					<option selected disabled >Selecciona un Estado</option>
-					<option value="1" selected>Activo</option>
-					<option value="0">Inactivo</option>					
-					</select>
-					<br>			
-				  </div>
+					<input type="area" id="direccion" name="direccion" class="form-control" placeholder="Dirección" required>
+					<br>
+					<input type="text" id="producto" name="producto" class="form-control" placeholder="Producto" required>
+					<br>
+					<input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad" required>
+					<br>
+					<input type="text" id="idstdopedido" name="idstdopedido" value="2" hidden>
+	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
-	        		<button type="button" class="btn btn-info d-none" id="btnEditarProducto">Editar Producto</button>
-	        		<button type="button" class="btn btn-info" id="btnRegistrarProducto">Crear Producto</button>
+	        		<button type="button" class="btn btn-info d-none" id="btnEditarPedido">Editar pedido</button>
+	        		<button type="button" class="btn btn-info" id="btnRegistrarPedido">Crear pedido</button>
 	      		</div>
 	    	</div>
 	  	</div>
 	</div>
-
-
 
 	<script src="../../librerias/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../../librerias/js/bootstrap/js/popper.js"></script>

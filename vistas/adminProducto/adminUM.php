@@ -81,33 +81,17 @@
 	<br>
 	<div
 	 class="col-lg-12 col-12 d-flex flex-row-reverse">
-	 
-	 	<button class="btn btn-lg btn-info" id="btnPrecios" data-toggle="modal" data-target="#modalPrecios">Precios</button>
-		 &nbsp;
-	 	<button class="btn btn-lg btn-info" id="btnStock" data-toggle="modal" data-target="#modalStock">Stock</button>
-		 &nbsp;
-		<button class="btn btn-lg btn-info" id="btnCategorias" data-toggle="modal" data-target="#modalCategorias">Categorias</button>
-		 &nbsp;
-		 <a href="adminUM.php" >
-		   	<button class="btn btn-lg btn-info" id="btnUnidadMedida" type="button">Unidad de Medida  </button>
-	    </a>
-		&nbsp;
-		<button class="btn btn-lg btn-info" id="btnCrearProducto" data-toggle="modal" data-target="#modalProducto">Crear Producto</button>
+	 <button class="btn btn-lg btn-info" id="btnCrearUM" data-toggle="modal" data-target="#modalUM">Crear Unidad de Medida</button>
 		
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaProductos" class="display" style="width:100%">
+		<table id="tablaUnidadMedida" class="display" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>ID Producto</th>
-					<th>Nombre</th>
-					<th>Descripcion</th>
-					<th>UM</th>
-					<th>Cod. Barras</th>
-					<th>Categoria</th>
-					<th>Estado</th>
-					<th>Fecha de Creación</th>
+	                <th>ID UM</th>
+					<th>Sigla UM</th>
+					<th>Nombre UM</th>
 					<th>Opciones</th>
 	            </tr>
 	        </thead>
@@ -116,45 +100,40 @@
 	    </table>
 	</div>
 
-	<!-- Modal de Creacion de Productos -->
+
+<!-- Modal  de unidades de Medida -->
 	<!-- Modal -->
-	<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="modalProductoLabel" aria-hidden="true">
+	<div class="modal fade" id="modalUM" tabindex="-1" role="dialog" aria-labelledby="modalUM" aria-hidden="true">
 	  	<div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title tituloModalCrear" id="titulo">Crear Producto</h5>
-	        		<h5 class="d-none modal-title tituloModalEditar" id="titulo">Editar Producto</h5>
+	        		<h5 class="modal-title tituloModalCrearUM" id="titulo">Crear Unidad de Medida</h5>
+	        		<h5 class="d-none modal-title tituloModalEditarUM" id="titulo">Editar de Medida</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
 	        		<!--<input type="number" id="idproducto" name="idproducto" class="form-control" placeholder="Codigo Producto" required> -->
-					<input type="text" id="nombrePrd" name="nombrePrd" class="form-control" placeholder="Nombre Producto" required>
+					<input type="text" id="siglaUM" name="siglaUM" class="form-control" placeholder="Sigla Unidad de Medida" required>
 					<br>
-					<input type="text" id="descripcionPrd" name="descripcionPrd" class="form-control" placeholder="Descripción Producto" required>
+					<input type="text" id="nombreUM" name="nombreUM" class="form-control" placeholder="Nombre Unidad de Medida" required>
 					<br>
-					<input type="text" id="UM" name="UM" class="form-control" placeholder="Unidad de Medida" required>
-					<br>
-					<input type="number" id="EAN" name="EAN" class="form-control" placeholder="Codigo de Barras" required>
-					<br>
-					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
-					<br>
-					<select id="estado" name="estado" class="form-control" required>
-					<option selected disabled >Selecciona un Estado</option>
-					<option value="1" selected>Activo</option>
-					<option value="0">Inactivo</option>					
+							
 					</select>
 					<br>			
 				  </div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
-	        		<button type="button" class="btn btn-info d-none" id="btnEditarProducto">Editar Producto</button>
-	        		<button type="button" class="btn btn-info" id="btnRegistrarProducto">Crear Producto</button>
+	        		<button type="button" class="btn btn-info d-none" id="btnEditarUM">Editar U.M</button>
+	        		<button type="button" class="btn btn-info" id="btnRegistrarUM">Crear U.M</button>
 	      		</div>
 	    	</div>
 	  	</div>
 	</div>
+
+
+
 
 
 
@@ -165,7 +144,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-	<script src="index.js"></script>
+	<script src="index UM.js"></script>
 </body>
 
 </html>
