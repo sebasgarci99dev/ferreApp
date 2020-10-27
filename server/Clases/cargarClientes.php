@@ -11,26 +11,23 @@
 	// Consulta a la BD
 	$consulta = "
 		SELECT 
-			p.idPedido,
-			concat(cl.nombres, ' ',cl.apellidos) as cliente,
-		    cl.email,
-			p.fechaPedido,
+			cl.idCliente,
+			cl.codigo,
+			CONCAT(
+				nombres, ' ', apellidos
+			) AS nombre,
+			cl.email,
+			cl.direccion,
+			cl.telefono_cel,
+			cl.telefono_fijo,
 			d.dep_nombre,
-			m.mun_nombre,
-			p.direccion,
-			e.estado
-		FROM pedidos p 
-		JOIN clientes cl 
-			ON cl.idCliente = p.idCliente
-		    AND cl.estado = 0
+			m.mun_nombre
+		FROM clientes cl
 		JOIN departamentos d 
-			ON d.id = p.idDepto
-		JOIN municipios m
-			ON m.id = p.idCiudad
-		JOIN estadopedido e 
-			ON e.idEstadoPedido = p.idEstadoPedido";
-
-
+			ON d.id = cl.idDepto 
+		JOIN municipios m 
+			ON m.id = cl.idMunicipio
+		WHERE cl.estado = 0;";
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
 
 	// Recorremos a los usuarios

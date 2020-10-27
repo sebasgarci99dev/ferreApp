@@ -1,0 +1,118 @@
+CREATE TABLE `producto` (
+	`idProducto` INT(10) NOT NULL AUTO_INCREMENT,
+	`nombre` VARCHAR(50) NULL DEFAULT NULL,
+	`descripcion` VARCHAR(100) NULL DEFAULT NULL,
+	`idUnidadMedida` INT(10) NULL DEFAULT NULL,
+	`codigoBarras` INT(30) NULL DEFAULT NULL,
+	`idCategoria` INT(10) NULL DEFAULT NULL,
+	`estado` INT(1) NULL DEFAULT NULL,
+	`fechaCreacion` DATE NULL,
+	PRIMARY KEY (`idProducto`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+CREATE TABLE `unidadMedida` (
+	`idUnidadMedida` INT NULL AUTO_INCREMENT,
+	`unidadMedida` VARCHAR(10) NULL DEFAULT NULL,
+	`descripcionUnidad` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`idUnidadMedida`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+CREATE TABLE `categoriaProducto` (
+	`idCategoria` INT NOT NULL AUTO_INCREMENT,
+	`categoria` VARCHAR(50) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`idCategoria`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+CREATE TABLE `precioProducto` (
+	`idProducto` INT NULL,
+	`precio` DOUBLE NULL DEFAULT NULL,
+	`estado` INT(2) NULL,
+	`fechaInicioVigencia` DATE NULL,
+	`fechaFinVigencia` DATE NULL
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+
+CREATE TABLE `stockproductos` (
+	`idProducto` INT(11) NOT NULL,
+	`stock` INT(11) NOT NULL
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `pedidos` (
+	`idPedido` INT NOT NULL AUTO_INCREMENT,
+	`idCliente` INT NULL,
+	`fechaPedido` DATE NULL,
+	`fechaEnvio` DATE NULL,
+	`idDepto` INT NULL,
+	`idCiudad` INT NULL,
+	`direccion` VARCHAR(100) NULL DEFAULT NULL,
+	`idEstadoPedido` INT NULL,
+	PRIMARY KEY (`idPedido`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+CREATE TABLE `departamentos` (
+	`idDepto` INT NOT NULL AUTO_INCREMENT,
+	`nombre_depto` INT NULL,
+	PRIMARY KEY (`idDepto`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+CREATE TABLE `ciudad` (
+	`idCiudad` INT(11) NOT NULL AUTO_INCREMENT,
+	`nombre_ciudad` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+	`idDepto` INT NULL,
+	PRIMARY KEY (`idCiudad`) USING BTREE
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `clientes` (
+	`idCliente` INT NOT NULL AUTO_INCREMENT,
+	`nombres` VARCHAR(50) NOT NULL DEFAULT '',
+	`apellidos` VARCHAR(50) NOT NULL DEFAULT '',
+	`direccion` VARCHAR(100) NOT NULL DEFAULT '',
+	`telefono_fijo` VARCHAR(50) NOT NULL DEFAULT '',
+	`telefono_cel` VARCHAR(50) NOT NULL DEFAULT '',
+	`email` VARCHAR(50) NOT NULL DEFAULT '',
+	`estado` INT(2) NOT NULL,
+	PRIMARY KEY (`idCliente`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+
+CREATE TABLE `estadoPedido` (
+	`idEstadoPedido` INT NOT NULL AUTO_INCREMENT,
+	`estado` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`idEstadoPedido`)
+)
+COLLATE='utf8mb4_general_ci'
+;
+
+
+-- Permisos del admin
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 1);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 2);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 3);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 4);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 5);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(1, 6);
+
+-- Permisos del vendedor
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(2, 2);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(2, 3);
+INSERT INTO permiso_modulo(idTipoUsuario, idModulo) VALUES(2, 4);
