@@ -40,6 +40,7 @@
 			border: 1px solid rgba(0,0,0,.125);
 			background-color: white;
 			color: black;
+			height: 17rem;
 		}
 
 		#menuUsuario ul {
