@@ -5,6 +5,7 @@
 	if($user == null) {
 		header('Location: ../index.php');
 	}
+
 ?>
 
 <html>
@@ -81,16 +82,25 @@
 	<br>
 	<div
 	 class="col-lg-12 col-12 d-flex flex-row-reverse">
-	 
+	 	<a href="adminPrecio.php" >
 	 	<button class="btn btn-lg btn-info" id="btnPrecios" data-toggle="modal" data-target="#modalPrecios">Precios</button>
+		 </a>
 		 &nbsp;
+		 &nbsp;
+		 <a href="adminStock.php" >
 	 	<button class="btn btn-lg btn-info" id="btnStock" data-toggle="modal" data-target="#modalStock">Stock</button>
+		 </a>
 		 &nbsp;
+		 &nbsp;
+		 <a href="adminCategorias.php" >
 		<button class="btn btn-lg btn-info" id="btnCategorias" data-toggle="modal" data-target="#modalCategorias">Categorias</button>
+		</a>
+		 &nbsp;
 		 &nbsp;
 		 <a href="adminUM.php" >
 		   	<button class="btn btn-lg btn-info" id="btnUnidadMedida" type="button">Unidad de Medida  </button>
 	    </a>
+		&nbsp;
 		&nbsp;
 		<button class="btn btn-lg btn-info" id="btnCrearProducto" data-toggle="modal" data-target="#modalProducto">Crear Producto</button>
 		
@@ -134,11 +144,44 @@
 					<br>
 					<input type="text" id="descripcionPrd" name="descripcionPrd" class="form-control" placeholder="Descripción Producto" required>
 					<br>
-					<input type="text" id="UM" name="UM" class="form-control" placeholder="Unidad de Medida" required>
+					<!--<input type="text" id="UM" name="UM" class="form-control" placeholder="Unidad de Medida" required>-->
+					<select id="UM" name="UM" class="form-control" required>
+					<option selected disabled >Selecciona una Unidad de Medida</option>
+					<?php
+					require_once('../../server/Clases/conexion.php');
+					// Realizamos la consulta para extraer los datos
+					$consulta ="
+						SELECT
+						u.idUnidadMedida, 
+						u.descripcionUnidad 
+						FROM unidadMedida u";
+ 					$valores = mysqli_query($conexion, $consulta) or die('no se consulto la unidad');
+					//$query = $mysqli_query ("SELECT * FROM paises");
+					while ($seleccion = mysqli_fetch_array($valores)) {
+		 			 // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+					  echo '<option value="'.$seleccion[idUnidadMedida].'">'.$seleccion[descripcionUnidad].'</option>';
+					}
+				  	?>
+				</select>	
 					<br>
 					<input type="number" id="EAN" name="EAN" class="form-control" placeholder="Codigo de Barras" required>
 					<br>
-					<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>
+					<!--<input type="number" id="categoria" name="categoria" class="form-control" placeholder="Categoria" required>-->
+					<select id="categoria" name="categoria" class="form-control" required>
+					<option selected disabled >Selecciona una Categoria</option>
+					<?php
+					// Realizamos la consulta para extraer los datos
+					$consultaCategoria ="
+						SELECT
+						u.idCategoria, 
+						u.categoria 
+						FROM categoriaproducto u";
+ 					$valorescategoria = mysqli_query($conexion, $consultaCategoria) or die('no se consulto la categoria');
+					while ($seleccionCategoria = mysqli_fetch_array($valorescategoria)) {
+		 			echo '<option value="'.$seleccionCategoria[idCategoria].'">'.$seleccionCategoria[categoria].'</option>';
+					}
+				  	?>
+				</select>	
 					<br>
 					<select id="estado" name="estado" class="form-control" required>
 					<option selected disabled >Selecciona un Estado</option>

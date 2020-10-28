@@ -21,5 +21,17 @@
     $producto = mysqli_fetch_array($resultado); 
     
 
-    
+	$str2 = "
+		DELETE FROM stockproductos
+		WHERE idProducto = '".$idProducto."';
+	";
+	$borrarstockproducto = mysqli_query($conexion, $str2) or die('no se elimino el producto');
+	
+	$str3 = "
+	DELETE FROM precioproducto
+	WHERE idProducto = '".$idProducto."';
+	";
+	$borrarprecioproducto= mysqli_query($conexion, $str3) or die('no se elimino el producto');	
+
+
     ?>

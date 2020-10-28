@@ -74,24 +74,23 @@
 		    	<button class="btn btn-info" id="volverMenu" type="button"> Volver </button>
 	    	</a>
 	    	<div class="col-11 d-flex justify-content-center" style="color: black;">
-	    		<h1> FerreApp > Admin. Productos > Unidad de Medida</h1>
+	    		<h1> FerreApp > Admin. Productos > Categorías</h1>
 	    	</div>
 	  	</nav>
 	</div>
 	<br>
 	<div
 	 class="col-lg-12 col-12 d-flex flex-row-reverse">
-	 <button class="btn btn-lg btn-info" id="btnCrearUM" data-toggle="modal" data-target="#modalUM">Crear Unidad de Medida</button>
+	 <button class="btn btn-lg btn-info" id="btnCrearCategoria" data-toggle="modal" data-target="#modalCategoria">Crear Categoria</button>
 		
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaUnidadMedida" class="display" style="width:100%">
+		<table id="tablaCategorias" class="display" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>ID UM</th>
-					<th>Sigla UM</th>
-					<th>Nombre UM</th>
+	                <th>ID Categoria</th>
+					<th>Categoria</th>
 					<th>Opciones</th>
 	            </tr>
 	        </thead>
@@ -103,30 +102,31 @@
 
 <!-- Modal  de unidades de Medida -->
 	<!-- Modal -->
-	<div class="modal fade" id="modalUM" tabindex="-1" role="dialog" aria-labelledby="modalUM" aria-hidden="true">
+	<div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="modalCategoria" aria-hidden="true">
 	  	<div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title tituloModalCrearUM" id="titulo">Crear Unidad Medida</h5>
-	        		<h5 class="d-none modal-title tituloModalEditarUM" id="titulo">Editar Unidad Medida</h5>
+	        		<h5 class="modal-title tituloModalCrearCategoria" id="titulo">Crear Categoria</h5>
+	        		<h5 class="d-none modal-title tituloModalEditarCategoria" id="titulo">Editar Categoria</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
+				  	<br>	
 	        		<!--<input type="number" id="idproducto" name="idproducto" class="form-control" placeholder="Codigo Producto" required> -->
-					<input type="text" id="siglaUM" name="siglaUM" class="form-control" placeholder="Sigla Unidad de Medida" required>
-					<br>
-					<input type="text" id="nombreUM" name="nombreUM" class="form-control" placeholder="Nombre Unidad de Medida" required>
-					<br>
+					<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Nombre Categoria" required>
+					<br	>
+				<!--	<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Nombre Unidad de Medida" required>
+					<br>-->
 							
 					</select>
 					<br>			
 				  </div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
-	        		<button type="button" class="btn btn-info d-none" id="btnEditarUM">Editar U.M</button>
-	        		<button type="button" class="btn btn-info" id="btnRegistrarUM">Crear U.M</button>
+	        		<button type="button" class="btn btn-info d-none" id="btnEditarCategoria">Editar Categoria</button>
+	        		<button type="button" class="btn btn-info" id="btnRegistrarCategoria">Crear Categoria</button>
 	      		</div>
 	    	</div>
 	  	</div>
@@ -144,7 +144,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-	<script src="index UM.js"></script>
+	<script src="index Categorias.js"></script>
 </body>
 
 </html>

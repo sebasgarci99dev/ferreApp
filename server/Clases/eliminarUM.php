@@ -9,14 +9,14 @@
 		DELETE FROM unidadMedida
 		WHERE idUnidadMedida = '".$idUnidadMedida."';
 	";
-	$borrarUnidad = mysqli_query($conexion, $str) or die('no se elimino el producto');
+	$borrarUnidad = mysqli_query($conexion, $str) or die('no se elimino la unidad de medida');
 
 	$str2 = "
 		SELECT *
 		FROM unidadMedida;
 		
 	";
-    $resultado = mysqli_query($conexion, $str2) or die('no se consultó producto');
+    $resultado = mysqli_query($conexion, $str2) or die('no se consultó la unidad de medida');
     
     $unidadMedida = mysqli_fetch_array($resultado); 
     

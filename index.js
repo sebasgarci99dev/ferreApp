@@ -61,7 +61,7 @@ $("#btnRegistrarUsuario").on("click", function(e) {
         			text: "Usuario creado correctamente!.", 
         			icon: "success"
         		}).then(function() {
-        			window.location.href = 'vistas/principal.php';
+        			window.location.href = '/principal.php';
         		});
         	} else {
         		swal(

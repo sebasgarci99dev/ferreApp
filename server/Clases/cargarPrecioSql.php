@@ -8,27 +8,26 @@
     // Llamamos a la conexion
 	require_once('conexion.php');
 
-	$idUnidadMedida= $_POST['idUnidadMedida'];
+	$idProducto= $_POST['idProducto'];
 	//$idUnidadMedida=1;
 
 	// Consulta a la BD
 	$consulta = "
 		SELECT
-		 u.idUnidadMedida, 
-		 u.unidadMedida, 
-		 u.descripcionUnidad 
-		FROM unidadMedida u
-		WHERE u.idUnidadMedida = $idUnidadMedida";
+		 u.idProducto, 
+		 u.precio 
+		 FROM precioproducto u
+		WHERE u.idProducto = $idProducto";
 
 
 
-	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto la unidad de Medida');
+	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto la categoria');
 
-	$um = mysqli_fetch_array($resultado);
+	$precio = mysqli_fetch_array($resultado);
 
 	
 
 	// Retornamos la info a la tabla
-	echo json_encode($um);
+	echo json_encode($precio);
 
 ?>

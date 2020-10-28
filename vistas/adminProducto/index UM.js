@@ -52,48 +52,45 @@ $("#btnRegistrarUM").on("click", function (e) {
 
 
 
-// Evento para editar el producto
+// Evento para editar la unidad de Medida
 $("#btnEditarUM").on("click", function (e) {
 	var unidadMedida = $("#siglaUM").val();
 	var descripcionUnidad = $("#nombreUM").val();
 
-
+	console.log(idUnidadMedida);
+	console.log(unidadMedida);
+	console.log(descripcionUnidad);
 	var data = new FormData();
-	data.append('idProducto', idProducto)
-	data.append('nombreprd', nombreprd);
-	data.append('descripcionPrd', descripcionPrd);
-	data.append('UM', UM);
-	data.append('EAN', EAN);
-
-	data.append('categoria', categoria);
-	data.append('estado', estado);
+	data.append('idUnidadMedida', idUnidadMedida)
+	data.append('unidadMedida', unidadMedida)
+	data.append('descripcionUnidad', descripcionUnidad);
 
 	//console.log(data.values(nombreprd));
 	// Servicio web
 	var solicitud = new XMLHttpRequest();
-	solicitud.open("POST", "../../server/Clases/editarProducto.php", true);
+	solicitud.open("POST", "../../server/Clases/editarUM.php", true);
 	solicitud.send(data);
 
 	solicitud.onreadystatechange = function () {
 		if (solicitud.readyState == 4) {
 			var respuesta = solicitud.responseText;
-			console.log("entrando al response de crear producto");
+			console.log("entrando al response de editar unidad");
 			if (respuesta == 0) {
 				swal({
 					title: "FerreApp",
-					text: "Producto editado correctamente!.",
+					text: "unidad de Medida se ha editado correctamente!.",
 					icon: "success"
 				}).then(function () {
-					recargarTablaProducto(function () {
-						$("#modalProducto").modal('hide');
-						limpiarModalProducto(function () {
+					recargarTablaUnidad(function () {
+						$("#modalUM").modal('hide');
+						limpiarModalUnidad(function () {
 						});
 					});
 				});
 			} else {
 				swal(
 					"FerreApp",
-					"Hubo un problema con la edición del Producto, comuniquese con el administrador.",
+					"Hubo un problema con la edición de la unidad, comuniquese con el administrador.",
 					"error"
 				);
 			}
@@ -103,55 +100,48 @@ $("#btnEditarUM").on("click", function (e) {
 
 // Cuando el modal de usuarios se cierre, se limpian los campos
 
-$("#modalProducto").on("hidden.bs.modal", function (e) {
-	limpiarModalProducto(function () {
+$("#modalUM").on("hidden.bs.modal", function (e) {
+	limpiarModalUnidad(function () {
 		//$("#nombrePrd").removeClass('d-none');
 		//$("#tipoUsuario").removeClass('d-none');
-		$("#btnRegistrarProducto").removeClass('d-none');
-		$(".tituloModalCrear").removeClass('d-none');
-		$(".tituloModalEditar").addClass('d-none');
-		$("#btnEditarProducto").addClass('d-none');
+		$("#btnRegistrarUM").removeClass('d-none');
+		$(".tituloModalCrearUM").removeClass('d-none');
+		$(".tituloModalEditarUM").addClass('d-none');
+		$("#btnEditarUM").addClass('d-none');
 	});
 });
 
-// Funcion para editar producto FUNCIONANDO
-$(document).on('click', '.editPrd', function () {
+// Funcion para editar producto Unidad
 
-	idProducto = $(this).data('id');
-	console.log(idProducto);
+$(document).on('click', '.editUnidad', function () {
+
+	idUnidadMedida = $(this).data('id');
+	//
 
 	var data = new FormData();
-	data.append('idProducto', idProducto);
+	data.append('idUnidadMedida', idUnidadMedida);
 
 	// Servicio web
 	var solicitud = new XMLHttpRequest();
-	solicitud.open("POST", "../../server/Clases/cargarProductoSql.php", true);
+	solicitud.open("POST", "../../server/Clases/cargarUMSql.php", true);
 	solicitud.send(data);
 
 	solicitud.onreadystatechange = function () {
 		if (solicitud.readyState == 4) {
-			console.log("ingresando solicitud onreadystatechange");
-			var producto = JSON.parse(solicitud.responseText);
-			console.log(producto.nombre);
-			console.log(producto.estado);
+			console.log("ingresando solicitud htmlResponse de la unidad de medida");
+			var unidad = JSON.parse(solicitud.responseText);
+			//console.log(producto.nombre);
+			//console.log(producto.estado);
 
-			$("#nombrePrd").val(producto.nombre);
-			$("#descripcionPrd").val(producto.descripcion);
-			$("#UM").val(producto.idUnidadMedida);
-			$("#EAN").val(producto.codigoBarras);
-			$("#categoria").val(producto.idCategoria);
-			$("#estado").val(producto.estado);
+			$("#siglaUM").val(unidad.unidadMedida);
+			$("#nombreUM").val(unidad.descripcionUnidad);
 
-			console.log(producto.codigoBarras);
+			$("#btnRegistrarUM").addClass('d-none');
+			$(".tituloModalCrearUM").addClass('d-none');
+			$(".tituloModalEditarUM").removeClass('d-none');
+			$("#btnEditarUM").removeClass('d-none');
 
-			//$("#pass").addClass('d-none');
-			//$("#tipoUsuario").addClass('d-none');
-			$("#btnRegistrarProducto").addClass('d-none');
-			$(".tituloModalCrear").addClass('d-none');
-			$(".tituloModalEditar").removeClass('d-none');
-			$("#btnEditarProducto").removeClass('d-none');
-
-			$("#modalProducto").modal('show')
+			$("#modalUM").modal('show')
 		}
 	}
 });
@@ -166,7 +156,7 @@ $(document).on('click', '.eliminarUnidad', function () {
 
 	swal({
 		title: "FerreApp",
-		text: "Estas seguro de eliminar permanentemente el producto con código: " + idProducto,
+		text: "Estas seguro de eliminar permanentemente la unidad de medida con id  " +  idUnidadMedida,
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,

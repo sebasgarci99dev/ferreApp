@@ -13,27 +13,18 @@
 	
 	$consulta ="
 	SELECT
-	 u.idProducto, 
-	 u.nombre, 
-	 u.descripcion, 
-	 um.unidadMedida, 
-	 u.codigoBarras, 
-	 cp.categoria, 
-	 u.estado, 
-	 u.fechaCreacion 
-	FROM producto u
-	JOIN categoriaproducto cp ON u.idCategoria = cp.idCategoria
-	JOIN unidadmedida um ON u.idUnidadMedida = um.idUnidadMedida
-	";
+	 u.idCategoria, 
+	 u.categoria
+	FROM categoriaproducto u";
 
 	 	
 
-	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el producto');
+	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto la categoria');
 	
 
 
 
-	// Recorremos a los usuarios
+	// Recorremos la unidad de M
 	while($data = mysqli_fetch_assoc($resultado)) {
 		$datos["data"][] = $data;
 		

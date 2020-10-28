@@ -239,10 +239,10 @@ function iniciarTablaProductos(callback) {
 			{ "data": "idProducto" },
 			{ "data": "nombre" },
 			{ "data": "descripcion" },
-			{ "data": "idUnidadMedida" },
+			{ "data": "unidadMedida" },
 			{ "data": "codigoBarras" },
-			{ "data": "idCategoria" },
-			{ "data": "estado" },
+			{ "data": "categoria" },
+			{ "data": "estado" }, 
 			{ "data": "fechaCreacion" },
 			{
 				"data": "idProducto",
