@@ -296,7 +296,7 @@ function limpiarModalUsuario(callback) {
 	$("#apellido").val("");
 	$("#direccion").val("");
 	$("#telefono").val("");
-	$("#tipoUsuario").val("");
+	// $("#tipoUsuario").val("");
 
 	$("#passAnt").val("");
 	$("#passNueva").val("");

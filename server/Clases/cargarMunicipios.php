@@ -6,31 +6,17 @@
     ini_set('max_execution_time', 0); 
 
     // Llamamos a la conexion
-	require_once('conexion.php');	
+	require_once('conexion.php');
+
+	$idDepto = $_POST['idDepto'];	
 
 	// Consulta a la BD
 	$consulta = "
 		SELECT 
-			p.idPedido,
-			concat(cl.nombres, ' ',cl.apellidos) as cliente,
-		    cl.email,
-			p.fechaPedido,
-			d.dep_nombre,
-			m.mun_nombre,
-			p.direccion,
-			e.estado
-		FROM pedidos p 
-		JOIN clientes cl 
-			ON cl.idCliente = p.idCliente
-		    AND cl.estado = 0
-		JOIN departamentos d 
-			ON d.id = p.idDepto
-		JOIN municipios m
-			ON m.id = p.idCiudad
-		JOIN estadopedido e 
-			ON e.idEstadoPedido = p.idEstadoPedido";
-
-
+			id,
+			mun_nombre
+		FROM municipios
+		WHERE dep_id = ".$idDepto;
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
 
 	// Recorremos a los usuarios
