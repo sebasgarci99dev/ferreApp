@@ -63,8 +63,8 @@
 			padding: 1% 2%;
 		}
 
-		#tablaUsuarios tbody td,
-		#tablaUsuarios thead th {
+		#tablaProductos tbody td,
+		#tablaProductos thead th {
 		    text-align: center;
 		}
 	</style>
@@ -154,12 +154,13 @@
 						SELECT
 						u.idUnidadMedida, 
 						u.descripcionUnidad 
-						FROM unidadMedida u";
+						FROM unidadmedida u";
  					$valores = mysqli_query($conexion, $consulta) or die('no se consulto la unidad');
 					//$query = $mysqli_query ("SELECT * FROM paises");
 					while ($seleccion = mysqli_fetch_array($valores)) {
 		 			 // En esta sección estamos llenando el select con datos extraidos de una base de datos.
 					  echo '<option value="'.$seleccion[idUnidadMedida].'">'.$seleccion[descripcionUnidad].'</option>';
+					
 					}
 				  	?>
 				</select>	

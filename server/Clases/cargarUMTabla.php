@@ -16,7 +16,7 @@
 	 u.idUnidadMedida, 
 	 u.unidadMedida, 
 	 u.descripcionUnidad 
-	FROM unidadMedida u";
+	FROM unidadmedida u";
 
 	 	
 
