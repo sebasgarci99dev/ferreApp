@@ -17,7 +17,7 @@
 			mun_nombre
 		FROM municipios
 		WHERE dep_id = ".$idDepto;
-	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
+	$resultado = mysqli_query($conexion, $consulta);
 
 	// Recorremos a los usuarios
 	while($data = mysqli_fetch_assoc($resultado)) {
