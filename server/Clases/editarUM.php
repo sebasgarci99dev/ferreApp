@@ -13,7 +13,7 @@
 
 
 	$str = "
-		UPDATE unidadMedida
+		UPDATE unidadmedida
 		SET 
 			unidadMedida = '".$unidadMedida."', 
 			descripcionUnidad = '".$descripcionUnidad."' 
@@ -28,7 +28,7 @@
 
 	$str2 = "
 		SELECT *
-		FROM unidadMedida
+		FROM unidadmedida
 		WHERE idUnidadMedida = ".$idUnidadMedida."
 	";
 

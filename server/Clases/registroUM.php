@@ -12,7 +12,7 @@
 	
 
 	$str = "
-		INSERT INTO unidadMedida(
+		INSERT INTO unidadmedida(
 		unidadMedida, 
 		descripcionUnidad
 		)
