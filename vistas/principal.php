@@ -134,13 +134,20 @@
 			      		<p class="card-text">Administra los usuarios del sistema de información.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card cardPedidos">
-			  		<a href="adminPedidos/adminPedidos.php">
-			    		<img class="card-img-top" src="../librerias/images/pedidos.png" alt="Card image cap">
+			  	<div class="card cardProveedores">
+			  		<a href="adminProveedores/adminProveedores.php">
+			    		<img class="card-img-top" src="../librerias/images/proveedores.png" alt="Card image cap">
 			    	</a>
 			    	<div class="card-body">
-				      	<h5 class="card-title">Pedidos</h5>
-				      	<p class="card-text">Maneja todas las compras de tus clientes.</p>
+				      	<h5 class="card-title">Proveedores</h5>
+				      	<p class="card-text">Gestiona las organizaciones que proveen la compañia.</p>
+			    	</div>
+			  	</div>
+			  	<div class="card cardReportes">
+			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
+			    	<div class="card-body">
+				      	<h5 class="card-title">Reportes</h5>
+				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
 			    	</div>
 			  	</div>
 			  	<div class="card cardProductos">
@@ -152,13 +159,13 @@
 				      	<p class="card-text">Administra toda la fuente de tu organización.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card cardBodega">
-			  		<a href="bodega/bodega.php">
-			    		<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
+			  	<div class="card cardPedidos">
+			  		<a href="adminPedidos/adminPedidos.php">
+			    		<img class="card-img-top" src="../librerias/images/pedidos.png" alt="Card image cap">
 			    	</a>
 			    	<div class="card-body">
-				      	<h5 class="card-title">Bodega</h5>
-				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
+				      	<h5 class="card-title">Pedidos</h5>
+				      	<p class="card-text">Maneja todas las compras de tus clientes.</p>
 			    	</div>
 			  	</div>
 			  	<div class="card cardClientes">
@@ -170,11 +177,13 @@
 				      	<p class="card-text">Atiende aquí a tus compradores.</p>
 			    	</div>
 			  	</div>
-			  	<div class="card cardReportes">
-			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
+			  	<div class="card cardBodega">
+			  		<a href="bodega/bodega.php">
+			    		<img class="card-img-top" src="../librerias/images/bodega.jpg" alt="Card image cap">
+			    	</a>
 			    	<div class="card-body">
-				      	<h5 class="card-title">Reportes</h5>
-				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
+				      	<h5 class="card-title">Bodega</h5>
+				      	<p class="card-text">Maneja todo tu inventario desde aquí.</p>
 			    	</div>
 			  	</div>
 			</div>
