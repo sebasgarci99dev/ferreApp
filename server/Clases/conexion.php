@@ -10,5 +10,3 @@
 	
 	mysqli_select_db($conexion, $based) or die('No se encontro la base de datos');
 
-
-?>
