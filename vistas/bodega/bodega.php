@@ -17,16 +17,15 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="../../librerias/images/icons/favicon.ico"/>
-		<link rel="stylesheet" type="text/css" href="../../librerias/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../librerias/js/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../../librerias/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="../../librerias/css/main.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
-		<link rel="stylesheet" type="text/css" href="../../librerias/js/bootstrap/css/bootstrap.min.css">
 	</head>
 	<style type="text/css">
 		body {
 			background-color: #efefef;
-		}z
+		}
 
 		.navbar {
 			background-color: #c5c5c5;
@@ -66,8 +65,10 @@
 			padding: 1% 2%;
 		}
 
-		#tablaUsuarios tbody td,
-		#tablaUsuarios thead th {
+		#tablaTramitePedidos tbody td,
+		#tablaTramitePedidos thead th,
+		#tablaPedidos thead td,
+		#tablaPedidos tbody td, {
 		    text-align: center;
 		}
 
@@ -201,75 +202,96 @@
 	      				<div class="row">
 			      			<div class="col-6">
 
-			      				<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Cliente: </span>
-			      					</div>
-			      					<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="cliente" name="cliente" placeholder="Cliente" required>
-			      				</div>	
+			      				<fieldset disabled>
+									<div class="card">
+										<h5 class="card-header">Información de Contacto Cliente</h5>
+											<div class="card-body">
+							      				<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Cliente: </span>
+							      					</div>
+							      					<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="cliente" name="cliente" placeholder="Cliente" style="background: white;">
+							      				</div>	
+												
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Celular: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="telefono" name="telefono" class="form-control" placeholder="Telefono Movil" style="background: white;">
+												</div>	
+												
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Dirección: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="direccionCliente" name="direccionCliente" class="form-control" placeholder="Dirección Cliente" style="background: white;">
+												</div>	
+									
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">E-Mail: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="email" name="email" class="form-control" placeholder="Email" style="background: white;">
+												</div>	
+											</div>
+									</div>
 								
+								<br>
 
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Celular: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="telefono" name="telefono" class="form-control" placeholder="Telefono Movil" required>
-								</div>	
-								
+									<div class="card">
+										<h5 class="card-header">Información Pedido</h5>
+											<div class="card-body">
 
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Dirección: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="direccion" name="direccion" class="form-control" placeholder="Dirección" required>
-								</div>	
-								
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Departamento: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="departamento" name="departamento" class="form-control" placeholder="Departamento" style="background: white;">
+												</div>	
+												
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Municipio: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="municipio" name="municipio" class="form-control" placeholder="Municipio" style="background: white;">
+												</div>	
+												
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Dirección: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="direccionPedido" name="direccionPedido" class="form-control" placeholder="Dirección Pedido" style="background: white;">
+												</div>
 
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">E-Mail: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="email" name="email" class="form-control" placeholder="Email" required>
-								</div>	
-								
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Fecha Pedido: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="fechaPedido" name="fechaPedido" class="form-control" placeholder="Fecha Pedido" style="background: white;">
+												</div>	
+												
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Estado Pedido: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="estPedido" name="estPedido" class="form-control" placeholder="Estado Pedido" style="background: white;">
+												</div>
 
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Departamento: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="departamento" name="departamento" class="form-control" placeholder="Departamento" required>
-								</div>	
-								
+												<div class="input-group mb-3">
+							      					<div class="input-group-prepend">
+							      						<span class="input-group-text" id="inputGroup-sizing-default">Aplica Domilicio: </span>
+							      					</div>
+												<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="estDomicilio" name="estDomicilio" class="form-control" placeholder="Aplica Domicilio: " style="background: white;">
+												</div>
 
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Municipio: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="municipio" name="municipio" class="form-control" placeholder="Municipio" required>
-								</div>	
-								
-
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Fecha Pedido: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="fechaPedido" name="fechaPedido" class="form-control" placeholder="Fecha Pedido" required>
-								</div>	
-								
-
-								<div class="input-group mb-3">
-			      					<div class="input-group-prepend">
-			      						<span class="input-group-text" id="inputGroup-sizing-default">Estado Pedido: </span>
-			      					</div>
-								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="estPedido" name="estPedido" class="form-control" placeholder="Estado Pedido" required>
-								</div>	
-								
-
+											</div>
+									</div>
+								</fieldset>
 							</div>
 
 							<div class="col-6">
-								<table id="tablaTramitePedidos" class="display table table-info table-striped dt-responsive nowrap" style="width:100%">
-				        			<thead>
+								<table id="tablaTramitePedidos" class="display table table-striped dt-responsive nowrap" style="width:100%;overflow-y: scroll;height: 315px;display: block;">
+				        			<thead class="table-primary">
 				           				<tr>
 				                			<th>Cód Producto</th>
 											<th>Producto</th>
@@ -281,14 +303,32 @@
 			       			 			
 			        				</tbody>
 				    			</table>
+
+								<div class="input-group mb-3">
+  									<div class="input-group-prepend">
+    									<label class="input-group-text" for="estadoPedido">Estado Pedido: </label>
+  									</div>
+  									<select id="estadoPedido" name="estadoPedido" class="custom-select form-control browser-default" id="estadoPedido" required>
+    									<option selected value="0">Seleccione un Estado</option>
+										<?php
+								// Realizamos la consulta para extraer los datos
+								          $query = $conexion -> query ("SELECT * FROM estadopedido");
+								          while ($valores = mysqli_fetch_array($query)) {
+								// En esta sección estamos llenando el select con datos extraidos de una base de datos.
+								            echo '<option value="'.$valores[idEstadoPedido].'">'.$valores[estado].'</option>';
+								          }
+								        ?>
+  									</select>
+								</div>
 			    			</div>
+			    			
 						</div>
 			    	</div>	
 	      		</div>
 
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
-	        		<button type="button" class="btn btn-info" id="btnFinPedidoBodega">Finalizar Pedido</button>
+	        		<button type="button" class="btn btn-info" id="btnFinPedidoBodega">Cambiar Estado</button>
 	      		</div>
 	    	</div>
 	  	</div>
