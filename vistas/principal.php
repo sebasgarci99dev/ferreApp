@@ -144,7 +144,9 @@
 			    	</div>
 			  	</div>
 			  	<div class="card cardReportes">
+				  <a href="adminReportes/reportesPrincipal.php">
 			    	<img class="card-img-top" src="../librerias/images/reportes.png" alt="Card image cap">
+				</a>
 			    	<div class="card-body">
 				      	<h5 class="card-title">Reportes</h5>
 				      	<p class="card-text">Administra la trazabilidad de tu organización.</p>
