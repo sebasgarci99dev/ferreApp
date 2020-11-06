@@ -1,8 +1,16 @@
 var idPedido;
 
 $(document).ready(function() {
-	iniciarTablapedidos(function() {
+	iniciarTablaPedidos(function() {
+	});
 
+	cargarSelectDepto(function() {
+	});
+
+	cargarSelectClientes(function() {
+		cargarSelectProductos(function() {
+
+		});
 	});
 });
 
@@ -44,8 +52,8 @@ $("#btnRegistrarPedido").on("click", function(e) {
         			icon: "success"
         		}).then(function() {
         			recargarTablaUsuarios(function() {
-        				$("#modalPedido").modal('hide');
-        				limpiarModalPedido(function() {
+        				$("#modalPedidoCliente").modal('hide');
+        				limpiarmodalPedidoCliente(function() {
 
         				});
         			});
@@ -99,7 +107,7 @@ $("#btnEditarPedido").on("click", function(e) {
         			icon: "success"
         		}).then(function() {
         			recargarTablaPedidos(function() {
-        				$("#modalPedido").modal('hide');
+        				$("#modalPedidoCliente").modal('hide');
         				limpiarModalUsuario(function() {
         				});
         			});
@@ -116,14 +124,9 @@ $("#btnEditarPedido").on("click", function(e) {
 });
 
 // Cuando el modal de usuarios se cierre, se limpian los campos
-$("#modalUsuario").on("hidden.bs.modal", function (e) {
-    limpiarModalUsuario(function() {
-    	$("#pass").removeClass('d-none');
-		$("#tipoUsuario").removeClass('d-none');
-		$("#btnRegistrarUsuario").removeClass('d-none');
-		$(".tituloModalCrear").removeClass('d-none');
-		$(".tituloModalEditar").addClass('d-none');
-		$("#btnEditarUsuario").addClass('d-none');
+$("#modalPedidoCliente").on("hidden.bs.modal", function (e) {
+    limpiarmodalPedidoCliente(function() {
+
     });
 });
 
@@ -162,85 +165,57 @@ $(document).on('click', '.editarPedido', function() {
 			$(".tituloModalEditar").removeClass('d-none');
 			$("#btnEditarPedido").removeClass('d-none');
 			
-			$("#modalPedido").modal('show')
+			$("#modalPedidoCliente").modal('show')
         }
     }
 });
 
-// Funcion para eliminar un pedido
-$(document).on('click', '.eliminarUsuario', function() { 
-	
-	idUsuario = $(this).data('id');
+$(document).on("change", "#selectClientes", function() {
+	let idCliente = $(this).val();
+	if(idCliente != 0) {
+		cargarInfoCliente(idCliente, function() {
 
-	swal({
-	  	title: "FerreApp",
-	  	text: "Estas seguro de eliminar el usuario con código: "+idUsuario,
-	  	icon: "warning",
-	  	buttons: true,
-	  	dangerMode: true,
-	})
-	.then((event) => {
-  		if (event) {
-	    	var data = new FormData();
-			data.append('idUsuario', idUsuario);
+		});
+	}
+});
 
-			// Servicio web
-		    var solicitud = new XMLHttpRequest();
-		    solicitud.open("POST", "../../server/Clases/eliminarUsuario.php", true);
-		    solicitud.send(data);
+$(document).on("click", "#btnAgregarProductos", function() {
+	let idProducto 		= $("#selectProductos").val();
+	let cantidadProd 	= $("#cantidadProd").val();
+	if(idProducto != 0 && cantidadProd != 0 && cantidadProd != null) {
+		agregarProductoTabla(idProducto, cantidadProd, function() {
+		});
+	}
+});
 
-		    solicitud.onreadystatechange = function() {
-		        if(solicitud.readyState == 4) {
-		        	var respuesta = JSON.parse(solicitud.responseText);
-		        	if(respuesta == 0) {
-		        		swal({
-		        			title: "FerreApp", 
-		        			text: "Usuario eliminado correctamente!.", 
-		        			icon: "success"
-		        		}).then(function() {
-		        			recargarTablaUsuarios(function() {
-		        				limpiarModalUsuario(function() {
-		        				});
-		        			});
-		        		});
-		        	} else {
-		        		swal(
-		        			"FerreApp", 
-		        			"Hubo un problema con la eliminación del usuario, comuniquese con el administrador.", 
-		        			"error"
-		        		);
-		        	}
-		        }
-		    }
-	  	} 
-	});	
+$(document).on('click', '.eliminarProductoFila', function (event) {
+    event.preventDefault();
+    $(this).closest('tr').remove();
 });
 
 function iniciarTablaPedidos(callback) {
 
-    $("#tablaUsuarios").DataTable({
+    $("#tablaPedidos").DataTable({
     	"ajax" : {
     		"method" : "POST",
     		"url" : "../../server/Clases/cargarPedidos.php"
     	},
         "columns": [
             {"data" : "idPedido"},
-			{"data" : "idCliente"},
-			{"data" : "FechaPedido"},
-			{"data" : "FechaEnvio"},
-			{"data" : "Departamento"},
-			{"data" : "Ciudad"},
-			{"data" : "Direccion"},
-			{"data" : "Producto"},
-			{"data" : "Cantidad"},
-			{"data"	: "idEstadoPedido",
-				render : function(data, type, row) {
-					var html = '<i id="editPedido" data-id='+data+' class="far fa-edit fa-2x editarPedido" ></i>';
-						html += ' | '
-						html += '<i class="far fa-trash-alt fa-2x eliminarPedido" data-id='+data+'></i>'
-					return html;
-				}
-			}        
+			{"data" : "cliente"},
+			{"data" : "email"},
+			{"data" : "fechaPedido"},
+			{"data" : "dep_nombre"},
+			{"data" : "mun_nombre"},
+			{"data" : "direccion"},
+			{"data" : "estado"}
+			// {"data"	: "idPedido",
+			// 	render : function(data, type, row) {
+			// 		var html = '<i data-id='+data+' class="far fa-edit fa-2x editarPedido" ></i>';
+			// 			html += ' | ';
+			// 		return html;
+			// 	}
+			// }        
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -255,15 +230,194 @@ function recargarTablaPedidos(callback) {
 	callback();
 }
 
-function limpiarModalUsuario(callback) {
+function limpiarmodalPedidoCliente(callback) {
 	// Limpiamos los datos del modal
-	$("#email").val("");
-	$("#pass").val("");
-	$("#nombre").val("");
-	$("#apellido").val("");
-	$("#direccion").val("");
+	$("#cliente").val("");
 	$("#telefono").val("");
-	$("#tipoUsuario").val("");
+	$("#direccion").val("");
+	$("#email").val("");
+	$("#departamento").val("");
+	$("#municipio").val("");
+	$("#direccionPedido").val("");
+	$("#cantidadProd").val("");
+
+	$("#selectClientes").selectpicker("val", 0);
+	$("#selectDepto").selectpicker("val", 0);
+	$("#selectMunic").selectpicker("val", 0);
+	$("#selectProductos").selectpicker("val", 0);
+
+	$("#tablaTramitePedidos tbody").children().remove()
 
 	callback();
+}
+
+function cargarSelectClientes(callback) {
+
+	// Servicio web
+    var solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarClientes.php", true);
+    solicitud.send();
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let clientes = (JSON.parse(solicitud.responseText)).data;
+        	let html 	= '<option value="0" selected> Seleccione un cliente </option>'
+
+        	// Recorremos el array con los departamentos
+        	for(var i in clientes){
+			    html += '<option value="'+clientes[i].idCliente+'">'+clientes[i].nombre+'</option>';
+			}
+
+			$("#selectClientes").html(html);
+			$("#selectClientes").selectpicker('refresh');
+			$("#selectClientes").selectpicker('val', '0');
+
+			callback();
+        }
+    }
+}
+
+function cargarInfoCliente(idCliente, callback) {
+	let data = new FormData();
+	data.append('idCliente', idCliente);
+
+	var solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarCliente.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	var cliente = JSON.parse(solicitud.responseText);
+        	$("#cliente").val(cliente.nombres+' '+cliente.apellidos);
+			$("#telefono").val(cliente.telefono);
+			$("#direccion").val(cliente.direccion);
+			$("#email").val(cliente.email);
+			$("#departamento").val(cliente.dep_nombre);
+			$("#municipio").val(cliente.mun_nombre);
+
+			callback();
+        }
+    }
+}
+
+function cargarSelectDepto(callback) {
+
+	// Inicializamos el selectpicker
+	$(".selectpicker").selectpicker();
+
+	// Servicio web
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarDeptos.php", true);
+    solicitud.send();
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let deptos 	= (JSON.parse(solicitud.responseText)).data;
+        	let html 	= '<option value="0" selected> Seleccione un departamento </option>'
+
+        	// Recorremos el array con los departamentos
+        	for(var i in deptos){
+			    html += '<option value="'+deptos[i].id+'">'+deptos[i].dep_nombre+'</option>';
+			}
+
+			$("#selectDepto").html(html);
+			$("#selectDepto").selectpicker('refresh');
+			$("#selectDepto").selectpicker('val', '0');
+			cargarSelectMunic(1, function() {
+				callback();
+			})
+        }
+    }
+}
+
+function cargarSelectMunic(idDepto, callback) {
+
+	// Servicio web
+	var data = new FormData();
+	data.append('idDepto', idDepto);
+
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarMunicipios.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let munic 	= (JSON.parse(solicitud.responseText)).data;
+        	let html 	= '<option value="0" selected> Seleccione un municipio </option>'
+
+        	// Recorremos el array con los departamentos
+        	for(var i in munic){
+			    html += '<option value="'+munic[i].id+'">'+munic[i].mun_nombre+'</option>';
+			}
+
+			$("#selectMunic").html(html);
+			$("#selectMunic").selectpicker('refresh');
+			$("#selectMunic").selectpicker('val', '0');
+
+			callback();
+        }
+    }
+}
+
+function cargarSelectProductos(callback) {
+
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarProductosTabla.php", true);
+    solicitud.send();
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let productos 	= (JSON.parse(solicitud.responseText)).data;
+        	let html 	= '<option value="0" selected> Seleccione un producto </option>'
+
+        	// Recorremos el array con los departamentos
+        	for(var i in productos){
+			    html += '<option value="'+productos[i].idProducto+'">'+productos[i].codigoBarras+'-'+productos[i].nombre+'</option>';
+			}
+
+			$("#selectProductos").html(html);
+			$("#selectProductos").selectpicker('refresh');
+			$("#selectProductos").selectpicker('val', '0');
+
+			callback();
+        }
+    }
+}
+
+function agregarProductoTabla(idProducto, cantidad, callback) {
+
+	// Servicio web
+	var data = new FormData();
+	data.append('idProducto', idProducto);
+
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarStockProducto.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let infoProd	= JSON.parse(solicitud.responseText);
+        	if(infoProd == null || infoProd == 'null') {
+        		swal("FerreApp", "No existe la cantidad sufiente en Bodega para este producto.", "error");
+        		return null;
+        	} else if(infoProd.cantExistente < cantidad) {
+        		swal("FerreApp", "No existe la cantidad sufiente en Bodega para este producto.", "error");
+        		return null;
+        	} else {
+        		var html = `
+                    <tr>
+                        <td> ${idProducto} </td>
+                        <td> ${infoProd.nombreProd} </td>
+                        <td> ${cantidad} </td>
+                        <td> ${infoProd.cantExistente} </td>
+                        <td> ${infoProd.precio} </td>
+                        <td> ${(infoProd.precio*cantidad)}</td>
+                        <td> <i class="fas fa-minus-circle fa-2x eliminarProductoFila"></i> </td>
+                    </tr>
+                `;
+                $("#tablaTramitePedidos tbody").append(html);
+        	}
+			callback();
+        }
+    }
 }
