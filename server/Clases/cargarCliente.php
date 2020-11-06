@@ -21,7 +21,9 @@
 			cl.telefono_cel,
 			cl.telefono_fijo,
 			d.id as idDepto,
-			m.id as idMun
+			m.id as idMun,
+			d.dep_nombre,
+			m.mun_nombre
 		FROM clientes cl
 		JOIN departamentos d 
 			ON d.id = cl.idDepto 
