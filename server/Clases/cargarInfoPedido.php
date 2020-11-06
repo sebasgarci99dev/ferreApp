@@ -15,12 +15,14 @@
 		SELECT 
 			concat(cl.nombres, ' ', cl.apellidos) as cliente,
 			cl.telefono_cel,
-			cl.direccion,
+			(cl.direccion) as direccionCliente,
 			cl.email,
 			d.dep_nombre,
 			m.mun_nombre,
+			(p.direccion) as direccionPedido,
 			p.fechaPedido,
-			e.estado
+			(ep.estado) as estPedido,
+			(ed.estado) as estDomicilio
 		FROM pedidos p 
 		JOIN clientes cl 
 			ON cl.idCliente = p.idCliente
@@ -29,8 +31,10 @@
 			ON d.id = p.idDepto
 		JOIN municipios m
 			ON m.id = p.idCiudad
-		JOIN estadopedido e 
-			ON e.idEstadoPedido = p.idEstadoPedido
+		JOIN estadopedido ep
+			ON ep.idEstadoPedido = p.idEstadoPedido
+		JOIN estadomicilio ed 
+			ON ed.idEstadoDomicilio = p.es_domicilio
 		WHERE p.idPedido = ".$idPedido;
 
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
@@ -41,3 +45,4 @@
 	echo json_encode($user);
 
 ?>
+

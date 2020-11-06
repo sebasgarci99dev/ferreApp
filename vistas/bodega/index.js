@@ -1,4 +1,5 @@
 var idPedido;
+
 $(document).ready(function() {
 	iniciarTablaPedidos(function() {
 
@@ -7,6 +8,7 @@ $(document).ready(function() {
 
 // Evento para ingresar productos en bodega
 $("#btnIngresoProdutosBodega").on("click", function(e) {
+
 	var producto = $("#productoIngreso").val();
 	var cantidad = $("#cantidadIngreso").val();
 
@@ -86,13 +88,48 @@ $("#btnRetiroProdutosBodega").on("click", function(e) {
 });
 
 
-// Cuando el modal de ingreso se cierre, se limpian los campos
+// Cuando el modal de ingreso se cierre, se limpian los campos                                                  DUDA.................!?
 $("#modalIngreso, #modalPedidos, #modalRetiro").on("hidden.bs.modal", function (e) {
     limpiarCampos(function() {
 		$("#btnIngresoProdutosBodega").removeClass('d-none');
 		$(".tituloModalCrear").removeClass('d-none');
     });
 });
+
+// Carga información de  Pedidos Clientes
+$(document).on('click', '.editarPedido', function() {
+    idPedido = $(this).data('id');
+    cargarDatosPedido(idPedido, function() {
+        cargarProductosPedido(idPedido, function() {
+            $("#modalPedidos").modal('show');
+        })
+    }) ;  
+});
+
+//  Cambio de Estado del pedido
+$(document).on('click', '#btnFinPedidoBodega', function() {
+
+    var idEstado = $("#estadoPedido").val();
+
+    if(idEstado == 4 || idEstado == 5) {
+        retirarProductosBodega(idPedido, idEstado, function() {
+            recargarTablaPedidos(function() {
+                $("#modalPedidos").modal('hide');
+                limpiarCampos(function() {
+                });
+            });
+        })
+    } else {
+        actualizaEstadoPedido(idPedido, idEstado, function() {
+             recargarTablaPedidos(function() {
+                $("#modalPedidos").modal('hide');
+                limpiarCampos(function() {
+                });
+            });
+        });
+    }
+});
+
 
 // Listar pedidos    
 function iniciarTablaPedidos(callback) {
@@ -140,25 +177,19 @@ function limpiarCampos(callback) {
     $("#cantidadRetiro").val("");
     $("#cliente").val("");
     $("#telefono").val("");
-    $("#direccion").val("");
+    $("#direccionCliente").val("");
     $("#email").val("");
     $("#departamento").val("");
     $("#municipio").val("");
+    $("#direccionPedido").val("");
     $("#estPedido").val("");
+    $("#estDomicilio").val("");
+    $("#estadoPedido").val(0);
+
     
     $("#tablaTramitePedidos tbody").children().remove()
 	callback();
 }
-
-// Carga información de  Pedidos Clientes
-$(document).on('click', '.editarPedido', function() {
-    idPedido = $(this).data('id');
-    cargarDatosPedido(idPedido, function() {
-        cargarProductosPedido(idPedido, function() {
-            $("#modalPedidos").modal('show');
-        })
-    }) ;  
-});
 
 function cargarDatosPedido(idPedido, callback) {
     var data = new FormData();
@@ -175,12 +206,14 @@ function cargarDatosPedido(idPedido, callback) {
             
             $("#cliente").val(pedido.cliente);
             $("#telefono").val(pedido.telefono_cel);
-            $("#direccion").val(pedido.direccion);
+            $("#direccionCliente").val(pedido.direccionCliente);
             $("#email").val(pedido.email);
             $("#departamento").val(pedido.dep_nombre);
             $("#municipio").val(pedido.mun_nombre);
+            $("#direccionPedido").val(pedido.direccionPedido);
             $("#fechaPedido").val(pedido.fechaPedido)
-            $("#estPedido").val(pedido.estado);
+            $("#estPedido").val(pedido.estPedido);
+            $("#estDomicilio").val(pedido.estDomicilio);
 
             callback();
         }
@@ -213,6 +246,67 @@ function cargarProductosPedido(idPedido, callback) {
 
             $("#tablaTramitePedidos tbody").html(html);
             callback();
+        }
+    }
+}
+
+function retirarProductosBodega(idPedido, idEstado, callback) {
+
+    var data = new FormData();
+    data.append('idPedido', idPedido);
+    data.append('idEstado', idEstado);
+
+    // Servicio web
+    var solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/retirarProductosBodega.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+            var respuesta = solicitud.responseText;
+            
+            if(respuesta == 0) {
+                swal({
+                    title: "FerreApp", 
+                    text: "Productos retirados de bodega correctamente!", 
+                    icon: "success"
+                }).then(function() {
+                    callback();
+                });
+            }
+        }
+    }
+}
+
+function actualizaEstadoPedido(idPedido, idEstado, callback) {
+    
+    var data = new FormData();
+    data.append('idPedido', idPedido);
+    data.append('idEstado', idEstado);
+
+    // Imprimir formaData en consola
+    for (var value of data.values()) {
+        console.log(value); 
+    }
+
+    // Servicio web
+    var solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/actualizaEstadoPedido.php", true); 
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+            var respuesta = solicitud.responseText;
+            
+            if(respuesta == 0) {
+                swal({
+                    title: "FerreApp", 
+                    text: "Estado del Pedido Actualizado Correctamente!", 
+                    icon: "success"
+                }).then(function() {
+                    callback();
+                });
+            }
         }
     }
 }
