@@ -115,17 +115,17 @@
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-	        		<input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+	        		<input type="email" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
 					<br>
-					<input type="password" id="pass" name="contrasena" class="form-control" placeholder="Contraseña" required>
+					<input type="password" id="pass" name="contrasena" class="form-control" placeholder="Contraseña" maxlength="20" required>
 					<br>
-					<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+					<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" maxlength="25" required>
 					<br>
-					<input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" required>
+					<input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" maxlength="25" required>
 					<br>
-					<input type="area" id="direccion" name="direccion" class="form-control" placeholder="Dirección" required>
+					<input type="area" id="direccion" name="direccion" class="form-control" placeholder="Dirección" maxlength="60" required>
 					<br>
-					<input type="number" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" required>
+					<input type="number" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" maxlength="15" required>
 					<br>
 					<input type="text" id="tipoUsuario" name="tipoUsuario" value="2" hidden>
 	      		</div>
@@ -149,9 +149,9 @@
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-					<input type="password" id="passAnt" name="passAnt" class="form-control" placeholder="Contraseña anterior" required>
+					<input type="password" id="passAnt" name="passAnt" class="form-control" placeholder="Contraseña anterior" maxlength="15" required>
 					<br>
-					<input type="password" id="passNueva" name="passNueva" class="form-control" placeholder="Contraseña nueva" required>
+					<input type="password" id="passNueva" name="passNueva" class="form-control" placeholder="Contraseña nueva" maxlength="15" required>
 	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
@@ -167,6 +167,7 @@
 	<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="../../librerias/js/validarCampos/ValidarCampos.js"></script>
 
 	<script src="index.js"></script>
 </body>

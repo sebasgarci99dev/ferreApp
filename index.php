@@ -24,14 +24,14 @@
 						| FerreApp |
 					</span>
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Usuario es requerido">
-						<input class="input100" type="text" id="usuario" name="usuario" placeholder="Usuario">
+						<input class="input100" type="text" id="usuario" name="usuario" placeholder="Usuario" maxlength="30">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user"></i>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Contraseña es requerido">
-						<input class="input100" type="password" id="pass" name="contrasena"  placeholder="Contraseña">
+						<input class="input100" type="password" id="pass" name="contrasena"  placeholder="Contraseña" maxlength="20">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock"></i>
@@ -52,6 +52,7 @@
 		<script src="librerias/js/bootstrap/js/bootstrap.min.js"></script>
 		<script src="librerias/js/select2/select2.min.js"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="librerias/js/validarCampos/ValidarCampos.js"></script>
 
 		<script src="index.js"></script>
 

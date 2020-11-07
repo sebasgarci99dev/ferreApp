@@ -3,6 +3,10 @@ $(document).ready(function() {
 	iniciarTablaUsuarios(function() {
 
 	});
+
+	validarCampos(function() {
+
+	});
 });
 
 // Evento para crear un usuario
@@ -302,4 +306,16 @@ function limpiarModalUsuario(callback) {
 	$("#passNueva").val("");
 
 	callback();
+}
+
+function validarCampos(callback) {
+	ValidarTipoCorreo("#email");
+	ValidarTipoTexto("#pass");
+	ValidarTipoTexto("#passAnt");
+	ValidarTipoTexto("#passNueva");
+
+    ValidarLetrasEspacio("#nombre");
+    ValidarLetrasEspacio("#apellido");
+    ValidarTipoTexto("#direccion");
+    ValidarSoloNumeros("#telefono");
 }
