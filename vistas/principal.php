@@ -61,7 +61,7 @@
 
 		#btnCerrarSesion {
 			position: absolute;
-			bottom: 2rem;
+			bottom: 1rem;
 		}
 
 		#imgPrincipal {
