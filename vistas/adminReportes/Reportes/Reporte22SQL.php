@@ -7,6 +7,7 @@ $consulta ="
     c.categoria,
     p.idProducto,
     p.codigoBarras,
+    u.unidadMedida,
     p.nombre,
     s.stock,
     FORMAT((s.stock*pr.precio),0) as valorizado
@@ -14,6 +15,7 @@ $consulta ="
     JOIN stockproductos s on s.idProducto=p.idProducto
     JOIN precioproducto pr on pr.idProducto = p.idProducto
     JOIN categoriaproducto c on c.idCategoria = p.idCategoria
+    JOIN unidadmedida u on u.idUnidadMedida=p.idunidadMedida
     WHERE s.stock !=0
 
  ";

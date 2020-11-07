@@ -100,6 +100,7 @@
 					<th>Id Producto</th>
 					<th>Codigo Barra</th>
 					<th>Nombre</th>
+					<th>U.M</th>
 					<th>Cantidad</th>
 					<th>Valorizado</th>
 	            </tr>
@@ -144,6 +145,7 @@
 			{ "data": "idProducto" },
 			{ "data": "codigoBarras" },
 			{ "data": "nombre" },
+			{ "data": "unidadMedida" },
 			{ "data": "stock" },
 			{ "data": "valorizado" }
 		

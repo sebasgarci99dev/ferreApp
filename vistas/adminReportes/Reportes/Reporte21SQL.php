@@ -6,7 +6,7 @@ $consulta ="
     SELECT
     c.idCategoria, 
     c.categoria,
-    FORMAT(SUM(s.stock*pr.precio),2) as valorizado
+    FORMAT(SUM(s.stock*pr.precio),0) as valorizado
     FROM categoriaproducto c
     JOIN producto p on c.idCategoria=p.idCategoria
     JOIN stockproductos s on s.idProducto=p.idProducto
@@ -16,8 +16,7 @@ $consulta ="
 
  ";
 
-     
-
+   
 $resultado = mysqli_query($conexion, $consulta) or die('no se consulto el precio');
 
 
