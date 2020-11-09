@@ -130,45 +130,13 @@ $("#modalPedidoCliente").on("hidden.bs.modal", function (e) {
     });
 });
 
-// Funcion para editar pedido
-$(document).on('click', '.editarPedido', function() { 
-	
-	idUsuario = $(this).data('id');
+// Evento para cargar los municipios si hay un cambio de depto
+$(document).on('change', '#selectDepto', function() {
+	let idDepto = $(this).val();
+	cargarSelectMunic(idDepto, function() {
 
-	var data = new FormData();
-	data.append('idPedido', idPedido);
-
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/cargarPedidos.php", true);
-    solicitud.send(data);
-
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var pedido = JSON.parse(solicitud.responseText);
-        	
-			
-			$("#idcliente").val(pedido.idcliente);
-			$("#fechapedido").val(pedido.fechapedido);
-			$("#fechaenvio").val(pedido.fechaenvio);
-			$("#departamento").val(pedido.departamento);
-			$("#ciudad").val(pedido.ciudad);
-			$("#direccion").val(pedido.direccion);
-			$("#producto").val(pedido.producto);
-			$("#cantidad").val(pedido.cantidad);
-			$("#idstdopedido").val(pedido.idstdopedido);
-
-			$("#pass").addClass('d-none');
-			$("#tipoUsuario").addClass('d-none');
-			$("#btnRegistrarPedido").addClass('d-none');
-			$(".tituloModalCrear").addClass('d-none');
-			$(".tituloModalEditar").removeClass('d-none');
-			$("#btnEditarPedido").removeClass('d-none');
-			
-			$("#modalPedidoCliente").modal('show')
-        }
-    }
-});
+	});
+})
 
 $(document).on("change", "#selectClientes", function() {
 	let idCliente = $(this).val();
@@ -179,18 +147,56 @@ $(document).on("change", "#selectClientes", function() {
 	}
 });
 
-$(document).on("click", "#btnAgregarProductos", function() {
+$(document).on("click", "#btnAgregarProductos", function(e) {
 	let idProducto 		= $("#selectProductos").val();
 	let cantidadProd 	= $("#cantidadProd").val();
+
+	if(cantidadProd == null || cantidadProd == 0) {
+		swal("FerreApp", "La cantidad esta vacia o tiene un valor de cero", "warning");
+		return;
+	} 
+
 	if(idProducto != 0 && cantidadProd != 0 && cantidadProd != null) {
 		agregarProductoTabla(idProducto, cantidadProd, function() {
+			// Total del precio del producto por la cantidad
+			var valores = parseInt(
+        		$(".totalProdFila").parents('tr:last').find('td')[5].innerHTML
+        	);
+			calcularTotalPedido('+', valores, function() {
+
+			});
 		});
 	}
 });
 
 $(document).on('click', '.eliminarProductoFila', function (event) {
     event.preventDefault();
+
+    // Removemos la fila
     $(this).closest('tr').remove();
+
+    // Restamos al total del pedido
+	var valores = parseInt(
+		$(this).parents('tr').find('td')[5].innerHTML
+	);
+	calcularTotalPedido('-', valores, function() {
+		
+	});
+});
+
+$(document).on('click', '#btnCrearPedido', function(e) {
+	e.preventDefault();
+
+	validarCliente(function() {
+		validarProductosPedido(function() {
+			validarInfoPedido(function() {
+				crearPedido(function() {
+
+				});
+			});
+		});
+	});
+
 });
 
 function iniciarTablaPedidos(callback) {
@@ -406,18 +412,134 @@ function agregarProductoTabla(idProducto, cantidad, callback) {
         	} else {
         		var html = `
                     <tr>
-                        <td> ${idProducto} </td>
-                        <td> ${infoProd.nombreProd} </td>
-                        <td> ${cantidad} </td>
-                        <td> ${infoProd.cantExistente} </td>
-                        <td> ${infoProd.precio} </td>
-                        <td> ${(infoProd.precio*cantidad)}</td>
+                        <td class='idProductos'>${idProducto}</td>
+                        <td>${infoProd.nombreProd}</td>
+                        <td class='cantSol'>${cantidad}</td>
+                        <td>${infoProd.cantExistente}</td>
+                        <td>${infoProd.precio}</td>
+                        <td class='totalProdFila'>${(infoProd.precio*cantidad)}</td>
                         <td> <i class="fas fa-minus-circle fa-2x eliminarProductoFila"></i> </td>
                     </tr>
                 `;
                 $("#tablaTramitePedidos tbody").append(html);
+
+                $("#selectProductos").selectpicker('val', 0);
+                $("#cantidadProd").val('');
+
+                callback();
         	}
+        }
+    }
+}
+
+function calcularTotalPedido(signo, valor, callback) {
+
+	var totalPedido = parseInt($("#totalPedido").val());
+
+	if(signo == '+') {
+	    var total = totalPedido+valor;
+	} else {
+		var total = totalPedido-valor;
+	}
+
+	$("#totalPedido").val(total)
+	
+}
+
+function validarCliente(callback) {
+
+	let cliente = $("#cliente").val();
+	let selectCliente = $("#selectClientes").val();
+
+	if(cliente == null && selectCliente == 0) {
+		swal("FerreApp", "No ha seleccionado un cliente para realizar el pedido.", "warning");
+		return;
+	} else {
+		callback();
+	}
+
+}
+
+function validarProductosPedido(callback) {
+
+	let cantFilasProd = $("#tablaTramitePedidos tbody tr").length;
+	if(cantFilasProd <= 0) {
+		swal("FerreApp", "No ha seleccionado un productos para realizar el pedido.", "warning");
+		return;
+	} else {
+		callback();
+	}
+
+}
+
+function validarInfoPedido(callback) {
+
+	let esDomi = $("#esDomicilio").prop('checked');
+
+	if(esDomi == true) {
+
+		let direccion = $("#direccionPedido").val();
+		let depto = $("#selectDepto").selectpicker('val');
+		let munic = $("#selectMunic").selectpicker('val');
+
+		if(
+			(direccion == '' || direccion == null)
+			|| depto == 0
+			|| munic == 0
+			) {
+			swal("FerreApp", "No ha digitado la información del domicilio.", "warning");
+			return;
+		} else {
 			callback();
+		}
+
+	} else {
+		callback();
+	}
+
+}
+
+function crearPedido(callback) {
+
+	// Servicio web
+	let data = new FormData();
+
+	// Info cliente
+	let idCliente = $("#selectClientes").selectpicker('val');
+	data.append('idCliente', idCliente);
+
+	// Info pedido
+	let esDomi = $("#esDomicilio").prop('checked');
+	if(esDomi == true) {
+		data.append('esDomi', esDomi);
+		data.append('direccion', $("#direccionPedido").val());
+		data.append('depto', $("#selectDepto").selectpicker('val'));
+		data.append('munic', $("#selectMunic").selectpicker('val'));
+	} else {
+		data.append('esDomi', esDomi);
+	}
+
+	// Info productos
+	let productos = '';
+	$('#tablaTramitePedidos tbody tr').each(function () {
+		let filaProd = {}
+		let idProd = $(this).find("td").eq(0).html();
+		let cantSol = $(this).find("td").eq(2).html();
+
+		filaProd.idProd = idProd;
+		filaProd.cantSol = cantSol;
+
+		productos += JSON.stringify(filaProd)+";";
+	});
+	data.append('productos', productos);
+
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/registroPedidos.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+        	let respuesta = solicitud.responseText;
         }
     }
 }
