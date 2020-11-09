@@ -224,8 +224,8 @@
 								<div class="input-group mb-3">
 			      					<div class="input-group-prepend">
 			      						<div class="form-check">
-										  	<input class="form-check-input" type="checkbox" value="0" id="defaultCheck1" id="esDomicilio">
-										  	<label class="form-check-label" for="defaultCheck1">
+										  	<input class="form-check-input" type="checkbox" value="0" id="esDomicilio">
+										  	<label class="form-check-label" for="esDomicilio">
 										    	Es domicilio?
 										  	</label>
 										</div>
@@ -267,7 +267,7 @@
 
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
-	        		<button type="button" class="btn btn-info" id="btnFinPedidoBodega">Finalizar Pedido</button>
+	        		<button type="button" class="btn btn-info" id="btnCrearPedido">Finalizar Pedido</button>
 	      		</div>
 	    	</div>
 	  	</div>
