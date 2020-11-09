@@ -179,18 +179,42 @@ $(document).on("change", "#selectClientes", function() {
 	}
 });
 
-$(document).on("click", "#btnAgregarProductos", function() {
+$(document).on("click", "#btnAgregarProductos", function(e) {
 	let idProducto 		= $("#selectProductos").val();
 	let cantidadProd 	= $("#cantidadProd").val();
+
+	if(cantidadProd == null || cantidadProd == 0) {
+		swal("FerreApp", "La cantidad esta vacia o tiene un valor de cero", "warning");
+		return;
+	} 
+
 	if(idProducto != 0 && cantidadProd != 0 && cantidadProd != null) {
 		agregarProductoTabla(idProducto, cantidadProd, function() {
+			// Total del precio del producto por la cantidad
+			var valores = parseInt(
+        		$(".totalProdFila").parents('tr:last').find('td')[5].innerHTML
+        	);
+			calcularTotalPedido('+', valores, function() {
+
+			});
 		});
 	}
 });
 
 $(document).on('click', '.eliminarProductoFila', function (event) {
     event.preventDefault();
+
+    // Removemos la fila
     $(this).closest('tr').remove();
+
+    // Restamos al total del pedido
+	var valores = parseInt(
+		$(this).parents('tr').find('td')[5].innerHTML
+	);
+	calcularTotalPedido('-', valores, function() {
+		
+	});
+
 });
 
 function iniciarTablaPedidos(callback) {
@@ -406,18 +430,32 @@ function agregarProductoTabla(idProducto, cantidad, callback) {
         	} else {
         		var html = `
                     <tr>
-                        <td> ${idProducto} </td>
-                        <td> ${infoProd.nombreProd} </td>
-                        <td> ${cantidad} </td>
-                        <td> ${infoProd.cantExistente} </td>
-                        <td> ${infoProd.precio} </td>
-                        <td> ${(infoProd.precio*cantidad)}</td>
+                        <td>${idProducto}</td>
+                        <td>${infoProd.nombreProd}</td>
+                        <td>${cantidad}</td>
+                        <td>${infoProd.cantExistente}</td>
+                        <td>${infoProd.precio}</td>
+                        <td class='totalProdFila'>${(infoProd.precio*cantidad)}</td>
                         <td> <i class="fas fa-minus-circle fa-2x eliminarProductoFila"></i> </td>
                     </tr>
                 `;
                 $("#tablaTramitePedidos tbody").append(html);
+                callback();
         	}
-			callback();
         }
     }
+}
+
+function calcularTotalPedido(signo, valor, callback) {
+
+	var totalPedido = parseInt($("#totalPedido").val());
+
+	if(signo == '+') {
+	    var total = totalPedido+valor;
+	} else {
+		var total = totalPedido-valor;
+	}
+
+	$("#totalPedido").val(total)
+	
 }

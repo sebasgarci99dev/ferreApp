@@ -138,7 +138,7 @@
 	      		<div class="modal-body">
 	      			<div class="container-fluid">
 	      				<div class="row">
-			      			<div class="col-4">
+			      			<div class="col-5">
 			      				<div class="input-group mb-3">
 			      					<div class="input-group-prepend">
 			      						<span class="input-group-text" id="inputGroup-sizing-default">Seleccionar: </span>
@@ -188,7 +188,7 @@
 								<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="municipio" name="municipio" class="form-control" placeholder="Municipio" disabled="disabled">
 								</div>
 							</div>
-							<div class="col-8">
+							<div class="col-7">
 								<div class="input-group mb-4">
 			      					<div class="input-group-prepend">
 			      						<span class="input-group-text" id="inputGroup-sizing-default">Seleccionar: </span>
@@ -219,7 +219,7 @@
 			    			</div>
 						</div>
 						<div class="row">
-							<div class="col-12">
+							<div class="col-5">
 								<hr>
 								<div class="input-group mb-3">
 			      					<div class="input-group-prepend">
@@ -252,7 +252,16 @@
 									</select>
 								</div>
 							</div>
-			    		</div>	
+							<div class="col-7">
+								<hr>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+			      						<span class="input-group-text" id="inputGroup-sizing-default">Total del Pedido: </span>
+			      					</div>
+		      						<input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="totalPedido" name="totalPedido" placeholder="$ Total" value="0" disabled="disabled">
+		      					</div>
+							</div>
+			    		</div>
 			    	</div>
 	      		</div>
 
