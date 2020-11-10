@@ -540,6 +540,28 @@ function crearPedido(callback) {
     solicitud.onreadystatechange = function() {
         if(solicitud.readyState == 4) {
         	let respuesta = solicitud.responseText;
+
+        	if(respuesta == 1 || respuesta == "1") {
+    			swal({
+        			title: "FerreApp", 
+        			text: "Pedido creado correctamente!.", 
+        			icon: "success"
+        		}).then(function() {
+        			recargarTablaPedidos(function() {
+        				$("#modalPedidoCliente").modal('hide');
+        				limpiarmodalPedidoCliente(function() {
+
+    					});
+        			});
+
+        		});
+        	} else {
+        		swal(
+        			"FerreApp", 
+        			"Hubo un problema con la creación del Pedido, comuniquese con el administrador.", 
+        			"error"
+        		);
+        	}
         }
     }
 }

@@ -142,7 +142,7 @@
 			      				<div class="input-group mb-3">
 			      					<div class="input-group-prepend">
 			      						<span class="input-group-text" id="inputGroup-sizing-default">Seleccionar: </span>
-			      						<select class="selectpicker form-control" id="selectClientes" data-live-search="true" data-style="btn-info" data-width="14rem">
+			      						<select class="selectpicker form-control" id="selectClientes" data-live-search="true" data-style="btn-info" data-width="20rem">
 			      						</select>
 			      					</div>
 			      				</div>
