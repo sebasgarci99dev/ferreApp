@@ -6,61 +6,67 @@ $(document).ready(function() {
 	iniciarTablaProveedores(function() {
 
 	});
+	validarCampos(function() {
+
+	});
 });
 
 // Evento para crear un Proveedores
 $("#btnRegistrarProveedores").on("click", function(e) {
-	var codigo 		= 	$("#codigo").val();
-	var nombre 		= 	$("#nombre").val();
-	var apellido 	= 	$("#apellido").val();
-	var direccion 	= 	$("#direccion").val();
-	var tel_fijo 	= 	$("#tel_fijo").val();
-	var tel_cel 	= 	$("#tel_cel").val();
-	var email 		= 	$("#email").val();
-	var selectDepto = 	$("#selectDepto").selectpicker('val');
-	var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	var data = new FormData();
-	data.append('codigo', codigo);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('tel_fijo', tel_fijo);
-	data.append('tel_cel', tel_cel);
-	data.append('email', email);
-	data.append('selectDepto', selectDepto);
-	data.append('selectMunic', selectMunic);
+	validaCrearEditarProveedor('crear', function() {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/registroProveedores.php", true);
-    solicitud.send(data);
+		var data = new FormData();
+		data.append('codigo', codigo);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('tel_fijo', tel_fijo);
+		data.append('tel_cel', tel_cel);
+		data.append('email', email);
+		data.append('selectDepto', selectDepto);
+		data.append('selectMunic', selectMunic);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Proveedor creado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaProveedores(function() {
-        				$("#modalProveedores").modal('hide');
-        				limpiarModalProveedores(function() {
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/registroProveedores.php", true);
+	    solicitud.send(data);
 
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la creación del Proveedor, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Proveedor creado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaProveedores(function() {
+	        				$("#modalProveedores").modal('hide');
+	        				limpiarModalProveedores(function() {
+
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la creación del Proveedor, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	});
 });
 
 // Cuando el modal de Proveedores se cierre, se limpian los campos
@@ -121,57 +127,60 @@ $(document).on('click', '.editarProveedores', function(e) {
 
 // Evento para editar el Proveedores
 $("#btnEditarProveedores").on("click", function(e) {
-	var codigo 		= 	$("#codigo").val();
-	var nombre 		= 	$("#nombre").val();
-	var apellido 	= 	$("#apellido").val();
-	var direccion 	= 	$("#direccion").val();
-	var tel_fijo 	= 	$("#tel_fijo").val();
-	var tel_cel 	= 	$("#tel_cel").val();
-	var email 		= 	$("#email").val();
-	var selectDepto = 	$("#selectDepto").selectpicker('val');
-	var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	var data = new FormData();
-	data.append('idProveedor', idProveedor);
-	data.append('codigo', codigo);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('tel_fijo', tel_fijo);
-	data.append('tel_cel', tel_cel);
-	data.append('email', email);
-	data.append('selectDepto', selectDepto);
-	data.append('selectMunic', selectMunic);
+	validaCrearEditarProveedor('editar', function() {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/editarProveedor.php", true);
-    solicitud.send(data);
+		var data = new FormData();
+		data.append('idProveedor', idProveedor);
+		data.append('codigo', codigo);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('tel_fijo', tel_fijo);
+		data.append('tel_cel', tel_cel);
+		data.append('email', email);
+		data.append('selectDepto', selectDepto);
+		data.append('selectMunic', selectMunic);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Proveedores editado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaProveedores(function() {
-        				$("#modalProveedores").modal('hide');
-        				limpiarModalProveedores(function() {
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la edición del Proveedores, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/editarProveedor.php", true);
+	    solicitud.send(data);
+
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Proveedores editado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaProveedores(function() {
+	        				$("#modalProveedores").modal('hide');
+	        				limpiarModalProveedores(function() {
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la edición del Proveedores, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	});
 });
 
 // Funcion para eliminar un Proveedores
@@ -344,4 +353,228 @@ function limpiarModalProveedores(callback) {
 	$("#selectMunic").selectpicker('val', '0');
 
 	callback();
+}
+
+function validarCampos(callback) {
+    ValidarTipoDatoIdentificadorDocumento("#codigo");
+    ValidarLetrasEspacio("#nombre");
+    ValidarLetrasEspacio("#apellido");
+    ValidarTipoTexto("#direccion");
+    ValidarSoloNumeros("#tel_cel");
+    ValidarSoloNumeros("#tel_fijo");
+    ValidarTipoCorreo("#email");
+}
+
+function validaCrearEditarProveedor(tipo, callback) {
+
+	if(tipo == 'crear') {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
+
+		if(codigo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: codigo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(nombre == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(apellido == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(direccion == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_fijo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono fijo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_cel == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono celular, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email.indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if(selectDepto == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un departamento",
+				"warning"
+			);
+			return;	
+		}
+
+		if(selectMunic == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un municipio",
+				"warning"
+			);
+			return;	
+		}
+
+		// Si pasa todas las validaciones, se procede con la creación
+		callback();
+
+	} else {
+
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
+
+		if(codigo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: codigo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(nombre == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(apellido == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(direccion == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_fijo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono fijo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_cel == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono celular, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email.indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if(selectDepto == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un departamento",
+				"warning"
+			);
+			return;	
+		}
+
+		if(selectMunic == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un municipio",
+				"warning"
+			);
+			return;	
+		}
+
+		// Si pasa todas las validaciones, se procede con la creación
+		callback();
+	}
+
 }

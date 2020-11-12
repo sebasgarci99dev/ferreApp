@@ -341,6 +341,8 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+	<script src="../../librerias/js/validarCampos/ValidarCampos.js"></script>
+
 	<script src="index.js"></script>
 </body>
 

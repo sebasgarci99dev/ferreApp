@@ -4,87 +4,95 @@ $(document).ready(function() {
 	iniciarTablaPedidos(function() {
 
 	});
+
+    validarCampos(function() {
+
+    })
 });
 
 // Evento para ingresar productos en bodega
 $("#btnIngresoProdutosBodega").on("click", function(e) {
+    validarIngresoEgresoProductos('ingreso', function() {
+        var producto = $("#productoIngreso").val();
+        var cantidad = $("#cantidadIngreso").val();
 
-	var producto = $("#productoIngreso").val();
-	var cantidad = $("#cantidadIngreso").val();
+        var data = new FormData();
+        data.append('producto', producto);
+        data.append('cantidad', cantidad);
 
-	var data = new FormData();
-	data.append('producto', producto);
-	data.append('cantidad', cantidad);
+        // Servicio web
+        var solicitud = new XMLHttpRequest();
+        solicitud.open("POST", "../../server/Clases/ingresoProdutosBodega.php", true);
+        solicitud.send(data);
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/ingresoProdutosBodega.php", true);
-    solicitud.send(data);
-
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Productos ingresados en bodega, correctamente", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaUsuarios(function() {
-        				$("#modalIngreso").modal('hide');
-        				limpiarmodalIngreso(function() {
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con el ingreso del producto en bodega, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
+        solicitud.onreadystatechange = function() {
+            if(solicitud.readyState == 4) {
+                var respuesta = solicitud.responseText;
+                if(respuesta == 0) {
+                    swal({
+                        title: "FerreApp", 
+                        text: "Productos ingresados en bodega, correctamente", 
+                        icon: "success"
+                    }).then(function() {
+                        recargarTablaUsuarios(function() {
+                            $("#modalIngreso").modal('hide');
+                            limpiarmodalIngreso(function() {
+                            });
+                        });
+                    });
+                } else {
+                    swal(
+                        "FerreApp", 
+                        "Hubo un problema con el ingreso del producto en bodega, comuniquese con el administrador.", 
+                        "error"
+                    );
+                }
+            }
         }
-    }
+    })
 });
 
 // Evento para retiro productos en bodega
 $("#btnRetiroProdutosBodega").on("click", function(e) {
-    var producto = $("#productoRetiro").val();
-    var cantidad = $("#cantidadRetiro").val();
+    validarIngresoEgresoProductos('retiro', function() {
+        var producto = $("#productoRetiro").val();
+        var cantidad = $("#cantidadRetiro").val();
 
-    var data = new FormData();
-    data.append('producto', producto);
-    data.append('cantidad', cantidad);
+        var data = new FormData();
+        data.append('producto', producto);
+        data.append('cantidad', cantidad);
 
-    // Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/retiroProductosBodega.php", true);
-    solicitud.send(data);
+        // Servicio web
+        var solicitud = new XMLHttpRequest();
+        solicitud.open("POST", "../../server/Clases/retiroProductosBodega.php", true);
+        solicitud.send(data);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-            var respuesta = solicitud.responseText;
-            if(respuesta == 0) {
-                swal({
-                    title: "FerreApp", 
-                    text: "Productos retirado de bodega, correctamente", 
-                    icon: "success"
-                }).then(function() {
-                    recargarTablaUsuarios(function() {
-                        $("#modalRetiro").modal('hide');
-                        limpiarmodalIngreso(function() {
+        solicitud.onreadystatechange = function() {
+            if(solicitud.readyState == 4) {
+                var respuesta = solicitud.responseText;
+                if(respuesta == 0) {
+                    swal({
+                        title: "FerreApp", 
+                        text: "Productos retirado de bodega, correctamente", 
+                        icon: "success"
+                    }).then(function() {
+                        recargarTablaUsuarios(function() {
+                            $("#modalRetiro").modal('hide');
+                            limpiarmodalIngreso(function() {
+                            });
                         });
                     });
-                });
-            } else {
-                swal(
-                    "FerreApp", 
-                    "Hubo un problema con el retiro del producto en bodega, comuniquese con el administrador.", 
-                    "error"
-                );
+                } else {
+                    swal(
+                        "FerreApp", 
+                        "Hubo un problema con el retiro del producto en bodega, comuniquese con el administrador.", 
+                        "error"
+                    );
+                }
             }
         }
-    }
+    });
+    
 });
 
 
@@ -308,5 +316,63 @@ function actualizaEstadoPedido(idPedido, idEstado, callback) {
                 });
             }
         }
+    }
+}
+
+function validarCampos(callback) {
+    ValidarSoloNumeros("#cantidadIngreso");
+    ValidarSoloNumeros("#cantidadRetiro");
+    callback();
+}
+
+function validarIngresoEgresoProductos(tipo, callback) {
+
+    if(tipo == 'ingreso') {
+        var producto = $("#productoIngreso").val();
+        var cantidad = $("#cantidadIngreso").val();
+
+        if(producto == 0) {
+            swal(
+                "FerreApp", 
+                "El campo: Producto, no se ha seleccionado.",
+                "warning"
+            );
+            return;
+        }
+
+        if(cantidad <= 0) {
+            swal(
+                "FerreApp", 
+                "El campo: Cantidad, no es valido.",
+                "warning"
+            );
+            return;
+        }
+
+        callback();
+
+    } else {
+        var producto = $("#productoRetiro").val();
+        var cantidad = $("#cantidadRetiro").val();
+
+        if(producto == 0) {
+            swal(
+                "FerreApp", 
+                "El campo: Producto, no se ha seleccionado.",
+                "warning"
+            );
+            return;
+        }
+
+        if(cantidad <= 0) {
+            swal(
+                "FerreApp", 
+                "El campo: Cantidad, no es valido.",
+                "warning"
+            );
+            return;
+        }
+
+        callback();
     }
 }

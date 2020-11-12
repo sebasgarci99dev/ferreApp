@@ -7,61 +7,66 @@ $(document).ready(function() {
 	iniciarTablaClientes(function() {
 
 	});
+	validarCampos(function() {
+
+	});
 });
 
 // Evento para crear un Cliente
 $("#btnRegistrarCliente").on("click", function(e) {
-	var codigo 		= 	$("#codigo").val();
-	var nombre 		= 	$("#nombre").val();
-	var apellido 	= 	$("#apellido").val();
-	var direccion 	= 	$("#direccion").val();
-	var tel_fijo 	= 	$("#tel_fijo").val();
-	var tel_cel 	= 	$("#tel_cel").val();
-	var email 		= 	$("#email").val();
-	var selectDepto = 	$("#selectDepto").selectpicker('val');
-	var selectMunic = 	$("#selectMunic").selectpicker('val');
+	validaCrearEditarCliente('crear', function() {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	var data = new FormData();
-	data.append('codigo', codigo);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('tel_fijo', tel_fijo);
-	data.append('tel_cel', tel_cel);
-	data.append('email', email);
-	data.append('selectDepto', selectDepto);
-	data.append('selectMunic', selectMunic);
+		var data = new FormData();
+		data.append('codigo', codigo);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('tel_fijo', tel_fijo);
+		data.append('tel_cel', tel_cel);
+		data.append('email', email);
+		data.append('selectDepto', selectDepto);
+		data.append('selectMunic', selectMunic);
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/registroCliente.php", true);
-    solicitud.send(data);
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/registroCliente.php", true);
+	    solicitud.send(data);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Cliente creado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaClientes(function() {
-        				$("#modalCliente").modal('hide');
-        				limpiarModalCliente(function() {
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Cliente creado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaClientes(function() {
+	        				$("#modalCliente").modal('hide');
+	        				limpiarModalCliente(function() {
 
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la creación del Cliente, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la creación del Cliente, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	});
 });
 
 // Cuando el modal de Clientes se cierre, se limpian los campos
@@ -122,57 +127,59 @@ $(document).on('click', '.editarCliente', function(e) {
 
 // Evento para editar el Cliente
 $("#btnEditarCliente").on("click", function(e) {
-	var codigo 		= 	$("#codigo").val();
-	var nombre 		= 	$("#nombre").val();
-	var apellido 	= 	$("#apellido").val();
-	var direccion 	= 	$("#direccion").val();
-	var tel_fijo 	= 	$("#tel_fijo").val();
-	var tel_cel 	= 	$("#tel_cel").val();
-	var email 		= 	$("#email").val();
-	var selectDepto = 	$("#selectDepto").selectpicker('val');
-	var selectMunic = 	$("#selectMunic").selectpicker('val');
+	validaCrearEditarCliente('editar', function() {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
 
-	var data = new FormData();
-	data.append('idCliente', idCliente);
-	data.append('codigo', codigo);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('tel_fijo', tel_fijo);
-	data.append('tel_cel', tel_cel);
-	data.append('email', email);
-	data.append('selectDepto', selectDepto);
-	data.append('selectMunic', selectMunic);
+		var data = new FormData();
+		data.append('idCliente', idCliente);
+		data.append('codigo', codigo);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('tel_fijo', tel_fijo);
+		data.append('tel_cel', tel_cel);
+		data.append('email', email);
+		data.append('selectDepto', selectDepto);
+		data.append('selectMunic', selectMunic);
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/editarCliente.php", true);
-    solicitud.send(data);
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/editarCliente.php", true);
+	    solicitud.send(data);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Cliente editado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaClientes(function() {
-        				$("#modalCliente").modal('hide');
-        				limpiarModalCliente(function() {
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la edición del Cliente, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Cliente editado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaClientes(function() {
+	        				$("#modalCliente").modal('hide');
+	        				limpiarModalCliente(function() {
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la edición del Cliente, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	})
 });
 
 // Funcion para eliminar un Cliente
@@ -343,4 +350,228 @@ function limpiarModalCliente(callback) {
 	$("#selectMunic").selectpicker('val', '0');
 
 	callback();
+}
+
+function validarCampos(callback) {
+    ValidarTipoDatoIdentificadorDocumento("#codigo");
+    ValidarLetrasEspacio("#nombre");
+    ValidarLetrasEspacio("#apellido");
+    ValidarTipoTexto("#direccion");
+    ValidarSoloNumeros("#tel_cel");
+    ValidarSoloNumeros("#tel_fijo");
+    ValidarTipoCorreo("#email");
+}
+
+function validaCrearEditarCliente(tipo, callback) {
+
+	if(tipo == 'crear') {
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
+
+		if(codigo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: codigo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(nombre == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(apellido == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(direccion == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_fijo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono fijo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_cel == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono celular, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email.indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if(selectDepto == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un departamento",
+				"warning"
+			);
+			return;	
+		}
+
+		if(selectMunic == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un municipio",
+				"warning"
+			);
+			return;	
+		}
+
+		// Si pasa todas las validaciones, se procede con la creación
+		callback();
+
+	} else {
+
+		var codigo 		= 	$("#codigo").val();
+		var nombre 		= 	$("#nombre").val();
+		var apellido 	= 	$("#apellido").val();
+		var direccion 	= 	$("#direccion").val();
+		var tel_fijo 	= 	$("#tel_fijo").val();
+		var tel_cel 	= 	$("#tel_cel").val();
+		var email 		= 	$("#email").val();
+		var selectDepto = 	$("#selectDepto").selectpicker('val');
+		var selectMunic = 	$("#selectMunic").selectpicker('val');
+
+		if(codigo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: codigo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(nombre == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(apellido == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(direccion == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_fijo == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono fijo, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(tel_cel == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono celular, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if(email.indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if(selectDepto == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un departamento",
+				"warning"
+			);
+			return;	
+		}
+
+		if(selectMunic == 0) {
+			swal(
+				"FerreApp", 
+				"No ha seleccionado un municipio",
+				"warning"
+			);
+			return;	
+		}
+
+		// Si pasa todas las validaciones, se procede con la creación
+		callback();
+	}
+
 }

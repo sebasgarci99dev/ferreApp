@@ -4,12 +4,14 @@ $(document).ready(function() {
 	iniciarTablaPedidos(function() {
 	});
 
-	cargarSelectDepto(function() {
+	validarCampos(function() {
 	});
 
-	cargarSelectClientes(function() {
-		cargarSelectProductos(function() {
+	cargarSelectDepto(function() {
+		cargarSelectClientes(function() {
+			cargarSelectProductos(function() {
 
+			});
 		});
 	});
 });
@@ -564,4 +566,11 @@ function crearPedido(callback) {
         	}
         }
     }
+}
+
+function validarCampos(callback) {
+	ValidarTipoTexto("#direccionPedido");
+	ValidarSoloNumeros("#cantidadProd");
+
+	callback();
 }
