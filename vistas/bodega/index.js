@@ -35,7 +35,7 @@ $("#btnIngresoProdutosBodega").on("click", function(e) {
                         icon: "success"
                     }).then(function() {
                         recargarTablaUsuarios(function() {
-                            $("#modalIngreso").modal('hide');
+                            // $("#modalIngreso").modal('hide');
                             limpiarmodalIngreso(function() {
                             });
                         });
@@ -77,8 +77,8 @@ $("#btnRetiroProdutosBodega").on("click", function(e) {
                         icon: "success"
                     }).then(function() {
                         recargarTablaUsuarios(function() {
-                            $("#modalRetiro").modal('hide');
-                            limpiarmodalIngreso(function() {
+                            // $("#modalRetiro").modal('hide');
+                            limpiarModalRetiro(function() {
                             });
                         });
                     });
@@ -109,9 +109,11 @@ $(document).on('click', '.editarPedido', function() {
     idPedido = $(this).data('id');
     cargarDatosPedido(idPedido, function() {
         cargarProductosPedido(idPedido, function() {
-            $("#modalPedidos").modal('show');
-        })
-    }) ;  
+            cargarSelectEstado(idPedido, function() {
+                $("#modalPedidos").modal('show');
+            });  
+        });
+    });  
 });
 
 //  Cambio de Estado del pedido
@@ -374,5 +376,64 @@ function validarIngresoEgresoProductos(tipo, callback) {
         }
 
         callback();
+    }
+}
+
+function limpiarModalIngreso(callback) {
+    $("#productoIngreso").val(0)
+    $("#cantidadIngreso").val('');
+    callback();
+}
+
+function limpiarModalRetiro(callback) {
+    $("#productoRetiro").val(0)
+    $("#cantidadRetiro").val('');
+    callback();
+}
+
+
+function cargarSelectEstado(idPedido, callback) {
+
+    // Inicializamos el selectpicker
+    $(".selectpicker").selectpicker();
+    $("#estadoPedido").html('');
+
+    // Servicio web
+    var data = new FormData();
+    data.append('idPedido', idPedido);
+
+    // Servicio web
+    let solicitud = new XMLHttpRequest();
+    solicitud.open("POST", "../../server/Clases/cargarEstadoPedido.php", true);
+    solicitud.send(data);
+
+    solicitud.onreadystatechange = function() {
+        if(solicitud.readyState == 4) {
+            let estados  = (JSON.parse(solicitud.responseText)).data;
+            let html    = '<option value="0"> Seleccione un estado </option>';
+
+            let estadoActual = 100;
+
+            // Recorremos el array con los departamentos
+            for(var i in estados){
+                estados[i].idEstadoPedido = parseInt(estados[i].idEstadoPedido);
+                console.log(estados[i])
+                if(estados[i].estadoPedido == 'N' && estados[i].idEstadoPedido < estadoActual) {
+                    html += '<option value="'+estados[i].idEstadoPedido+'" disabled="disabled">'+estados[i].estado+'</option>';
+
+                } else if(estados[i].estadoPedido == 'S'){
+                    estadoActual = estados[i].idEstadoPedido;
+                    html += '<option value="'+estados[i].idEstadoPedido+'" selected>'+estados[i].estado+'</option>';
+
+                } else if(estados[i].estadoPedido == 'N' && estados[i].idEstadoPedido > estadoActual) {
+                    html += '<option value="'+estados[i].idEstadoPedido+'">'+estados[i].estado+'</option>';
+                }
+            }
+
+            $("#estadoPedido").html(html);
+            $("#estadoPedido").selectpicker('refresh');
+            $("#estadoPedido").selectpicker('val', estadoActual);
+            callback();
+        }
     }
 }

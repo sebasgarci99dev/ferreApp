@@ -1,5 +1,4 @@
 var idPedido;
-
 $(document).ready(function() {
 	iniciarTablaPedidos(function() {
 	});
@@ -408,7 +407,7 @@ function agregarProductoTabla(idProducto, cantidad, callback) {
         	if(infoProd == null || infoProd == 'null') {
         		swal("FerreApp", "No existe la cantidad sufiente en Bodega para este producto.", "error");
         		return null;
-        	} else if(infoProd.cantExistente < cantidad) {
+        	} else if(cantidad > parseInt(infoProd.cantExistente) ) {
         		swal("FerreApp", "No existe la cantidad sufiente en Bodega para este producto.", "error");
         		return null;
         	} else {
