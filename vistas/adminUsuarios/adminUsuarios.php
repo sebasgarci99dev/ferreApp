@@ -18,6 +18,10 @@
 		<link rel="stylesheet" type="text/css" href="../../librerias/css/main.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+		<!-- Latest compiled and minified CSS SELECTPICKER--> 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 	</head>
 	<style type="text/css">
 		body {
@@ -127,7 +131,11 @@
 					<br>
 					<input type="number" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" maxlength="15" required>
 					<br>
-					<input type="text" id="tipoUsuario" name="tipoUsuario" value="2" hidden>
+					<select class="selectpicker form-control" id="tipoUsuario" data-live-search="true" data-style="btn-info" name="tipoUsuario">
+						<option value="0" selected>Seleccione un Tipo de Usuario</option>
+						<option value="2">Vendedor</option>
+						<option value="3">Bodega</option>
+					</select>
 	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary btnCerrarModal" data-dismiss="modal">Cerrar</button>
@@ -137,6 +145,7 @@
 	    	</div>
 	  	</div>
 	</div>
+
 
 	<!-- Modal para el cambio de contraseña -->
 	<div class="modal fade" id="modalCambioPass" tabindex="-1" role="dialog" aria-labelledby="modalCambioPassLabel" aria-hidden="true">
@@ -168,6 +177,9 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="../../librerias/js/validarCampos/ValidarCampos.js"></script>
+
+	<!-- Latest compiled and minified JavaScript SELECTPICKER-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 	<script src="index.js"></script>
 </body>
