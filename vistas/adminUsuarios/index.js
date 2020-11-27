@@ -19,7 +19,8 @@ $("#btnRegistrarUsuario").on("click", function(e) {
 		var apellido 		= $("#apellido").val();
 		var direccion 		= $("#direccion").val();
 		var telefono 		= $("#telefono").val();
-		var tipoUsuario 	= $("#tipoUsuario").val();
+		var tipoUsuario 	= $("#tipoUsuario").selectpicker('val');
+
 
 		var data = new FormData();
 		data.append('email', email);
@@ -78,7 +79,7 @@ $("#modalUsuario").on("hidden.bs.modal", function (e) {
 
 // Funcion para editar usuario
 $(document).on('click', '.editarUsuario', function() { 
-	
+
 	idUsuario = $(this).data('id');
 	console.log(idUsuario);
 
@@ -100,8 +101,11 @@ $(document).on('click', '.editarUsuario', function() {
 			$("#direccion").val(usuario.Direccion);
 			$("#telefono").val(usuario.Telefono);
 
+			$("#tipoUsuario").selectpicker('val', usuario.idTipoUsuario);
+			
+
 			$("#pass").addClass('d-none');
-			$("#tipoUsuario").addClass('d-none');
+
 			$("#btnRegistrarUsuario").addClass('d-none');
 			$(".tituloModalCrear").addClass('d-none');
 			$(".tituloModalEditar").removeClass('d-none');
@@ -121,6 +125,7 @@ $("#btnEditarUsuario").on("click", function(e) {
 		var apellido 		= $("#apellido").val();
 		var direccion 		= $("#direccion").val();
 		var telefono 		= $("#telefono").val();
+		var tipoUsuario 	= $("#tipoUsuario").selectpicker('val');
 
 		var data = new FormData();
 		data.append('idUsuario', idUsuario);
@@ -129,6 +134,7 @@ $("#btnEditarUsuario").on("click", function(e) {
 		data.append('apellido', apellido);
 		data.append('direccion', direccion);
 		data.append('telefono', telefono);
+		data.append('tipoUsuario', tipoUsuario);
 
 		// Servicio web
 	    var solicitud = new XMLHttpRequest();
@@ -309,6 +315,7 @@ function limpiarModalUsuario(callback) {
 	$("#direccion").val("");
 	$("#telefono").val("");
 	// $("#tipoUsuario").val("");
+	$("#tipoUsuario").selectpicker('val', '0');
 
 	$("#passAnt").val("");
 	$("#passNueva").val("");
@@ -395,6 +402,14 @@ function validaCrearEditarUsuario(tipo, callback) {
 			return;
 		}
 
+		if($("#tipoUsuario").val() == 0) {
+			swal(
+				"FerreApp", 
+				"El campo: Tipo de Usuario, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
 		// Si pasa todas las validaciones, se procede con la creación
 		callback();
 
@@ -449,6 +464,15 @@ function validaCrearEditarUsuario(tipo, callback) {
 			swal(
 				"FerreApp", 
 				"El campo: telefono, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#tipoUsuario").val() == 0) {
+			swal(
+				"FerreApp", 
+				"El campo: Tipo de Usuario, se encuentra vacio.",
 				"warning"
 			);
 			return;

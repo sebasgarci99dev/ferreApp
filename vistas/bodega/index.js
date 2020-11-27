@@ -3,12 +3,23 @@ var idPedido;
 $(document).ready(function() {
 	iniciarTablaPedidos(function() {
 
+        setInterval(
+            function(){
+                recargarTablaPedidos(function() {
+                    console.log('asd')
+                });
+            },
+            8000
+        );
+
 	});
 
     validarCampos(function() {
 
-    })
+    });
 });
+
+
 
 // Evento para ingresar productos en bodega
 $("#btnIngresoProdutosBodega").on("click", function(e) {
@@ -95,7 +106,6 @@ $("#btnRetiroProdutosBodega").on("click", function(e) {
     
 });
 
-
 // Cuando el modal de ingreso se cierre, se limpian los campos                                                  DUDA.................!?
 $("#modalIngreso, #modalPedidos, #modalRetiro").on("hidden.bs.modal", function (e) {
     limpiarCampos(function() {
@@ -140,11 +150,19 @@ $(document).on('click', '#btnFinPedidoBodega', function() {
     }
 });
 
+$(document).on('click', '#generarDocumentoPedido', function() {
+    var idPedido = $(this).data('idpedido');
+    window.open('../adminReportes/imp.php?idPedido='+idPedido, '_blank');
+});
 
 // Listar pedidos    
 function iniciarTablaPedidos(callback) {
 
     $("#tablaPedidos").DataTable({
+        "scrollX": true,
+        "order": [
+            [ 0, "desc" ]
+        ],
     	"ajax" : {
     		"method" : "POST",
     		"url" : "../../server/Clases/cargarPedidos.php"
@@ -152,7 +170,7 @@ function iniciarTablaPedidos(callback) {
         "columns": [
             {"data" : "idPedido"},
 			{"data" : "cliente"},
-			{"data" : "email"},
+			// {"data" : "email"},
 			{"data" : "fechaPedido"},
 			{"data" : "dep_nombre"},
 			{"data" : "mun_nombre"},
@@ -172,7 +190,6 @@ function iniciarTablaPedidos(callback) {
 
 	callback();
 }
-
 
 function recargarTablaPedidos(callback) {
 	$("#tablaPedidos").DataTable().ajax.reload();
@@ -391,7 +408,6 @@ function limpiarModalRetiro(callback) {
     callback();
 }
 
-
 function cargarSelectEstado(idPedido, callback) {
 
     // Inicializamos el selectpicker
@@ -417,7 +433,6 @@ function cargarSelectEstado(idPedido, callback) {
             // Recorremos el array con los departamentos
             for(var i in estados){
                 estados[i].idEstadoPedido = parseInt(estados[i].idEstadoPedido);
-                console.log(estados[i])
                 if(estados[i].estadoPedido == 'N' && estados[i].idEstadoPedido < estadoActual) {
                     html += '<option value="'+estados[i].idEstadoPedido+'" disabled="disabled">'+estados[i].estado+'</option>';
 
@@ -428,6 +443,18 @@ function cargarSelectEstado(idPedido, callback) {
                 } else if(estados[i].estadoPedido == 'N' && estados[i].idEstadoPedido > estadoActual) {
                     html += '<option value="'+estados[i].idEstadoPedido+'">'+estados[i].estado+'</option>';
                 }
+            }
+
+            if(estadoActual == 4 || estadoActual == 5){
+                $("#estadoPedido").attr('disabled',true);
+
+                $("#generarDocumentoPedido").data('idpedido', idPedido);
+                $("#generarDocumentoPedido").prop('value', 'Doc '+idPedido);
+                $(".seccionDocumento").show();
+
+            } else {
+                $("#estadoPedido").attr('disabled',false);
+                $(".seccionDocumento").hide();
             }
 
             $("#estadoPedido").html(html);

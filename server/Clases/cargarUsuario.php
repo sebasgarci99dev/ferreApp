@@ -18,11 +18,13 @@
 			u.Nombre,
 			u.Apellido,
 			u.Direccion,
-			u.Telefono
+			u.Telefono,
+			u.idTipoUsuario
 		FROM usuario u 
 		JOIN tipo_usuario tp 
 			ON tp.idTipoUsuario = u.idTipoUsuario
 		WHERE u.idUsuario = ".$idUsuario;
+		
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
 
 	$user = mysqli_fetch_array($resultado);

@@ -28,7 +28,8 @@
 		JOIN municipios m
 			ON m.id = p.idCiudad
 		JOIN estadopedido e 
-			ON e.idEstadoPedido = p.idEstadoPedido";
+			ON e.idEstadoPedido = p.idEstadoPedido
+		ORDER BY p.idPedido DESC;";
 	$resultado = mysqli_query($conexion, $consulta) or die('no se consulto el usuario');
 
 	// Recorremos a los usuarios

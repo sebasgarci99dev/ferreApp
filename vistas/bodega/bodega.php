@@ -109,7 +109,7 @@
 	            <tr>
 	                <th>Cód. pedido</th>
 					<th>Cliente</th>
-					<th>Email</th>
+					<!-- <th>Email</th> -->
 					<th>Fecha Pedido</th>
 					<th>Departamento</th>
 					<th>Ciudad</th>
@@ -311,8 +311,14 @@
   									<div class="input-group-prepend">
     									<label class="input-group-text" for="estadoPedido">Estado Pedido: </label>
   									</div>
-  									<select id="estadoPedido" name="estadoPedido" class="selectpicker" id="estadoPedido" required>
+  									<select id="estadoPedido" name="estadoPedido" class="selectpicker" id="estadoPedido" data-width="100%" required>
   									</select>
+								</div>
+								<div class="input-group mb-3 seccionDocumento">
+									<div class="input-group-prepend">
+    									<label class="input-group-text" for="estadoPedido">Factura: </label>
+  									</div>
+									<button class='btn btn-info w-100' id='generarDocumentoPedido' data-idPedido='0'>Doc</button>
 								</div>
 			    			</div>
 			    			
