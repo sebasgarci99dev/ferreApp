@@ -9,7 +9,7 @@ $(document).ready(function() {
                     console.log('asd')
                 });
             },
-            8000
+            6000
         );
 
 	});

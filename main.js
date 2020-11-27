@@ -65,16 +65,23 @@
             if(solicitud.readyState == 4) {
                 var respuesta = JSON.parse(solicitud.responseText);
                 if(respuesta.idTipoUsuario == 2) {
+                    $(".card-columns").css('column-count', 2)
                     $(".cardAdminUsers").hide();
                     $(".cardBodega").hide();
                     $(".cardReportes").hide();
                 }
 
                 if(respuesta.idTipoUsuario == 3) {
+                    $(".card-columns").css('column-count', 2)
                     $(".cardAdminUsers").hide();
-                    $(".cardProveedores").hide();
+                    // $(".cardProveedores").hide();
                     $(".cardPedidos").hide();
                     $(".cardClientes").hide();
+                    $(".cardReportes").hide();
+                }
+
+                if(respuesta.idTipoUsuario == 1) {
+                    $(".card-columns").css('column-count', 3)
                 }
             }
         }
