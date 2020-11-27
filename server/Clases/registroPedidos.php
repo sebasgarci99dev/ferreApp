@@ -9,7 +9,7 @@
 		$direccion 	= $_POST['direccion'];
 		$depto 		= $_POST['depto'];
 		$munic 		= $_POST['munic'];
-		$esDomicilio = 2;
+		$esDomicilio = 1;
 	} else {
 		$str = "
 			select 
@@ -24,7 +24,7 @@
 		$direccion 	= $cliente['direccion'];
 		$depto 		= $cliente['idDepto'];
 		$munic 		= $cliente['idMunicipio'];
-		$esDomicilio = 1;
+		$esDomicilio = 2;
 	}
 
 	// Creamos el pedido
