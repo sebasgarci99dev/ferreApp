@@ -21,6 +21,9 @@
 		<link rel="stylesheet" type="text/css" href="../../librerias/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="../../librerias/css/main.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+		<!-- Latest compiled and minified CSS SELECTPICKER--> 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 	</head>
 	<style type="text/css">
 		body {
@@ -308,16 +311,7 @@
   									<div class="input-group-prepend">
     									<label class="input-group-text" for="estadoPedido">Estado Pedido: </label>
   									</div>
-  									<select id="estadoPedido" name="estadoPedido" class="custom-select form-control browser-default" id="estadoPedido" required>
-    									<option selected value="0">Seleccione un Estado</option>
-										<?php
-								// Realizamos la consulta para extraer los datos
-								          $query = $conexion -> query ("SELECT * FROM estadopedido");
-								          while ($valores = mysqli_fetch_array($query)) {
-								// En esta sección estamos llenando el select con datos extraidos de una base de datos.
-								            echo '<option value="'.$valores[idEstadoPedido].'">'.$valores[estado].'</option>';
-								          }
-								        ?>
+  									<select id="estadoPedido" name="estadoPedido" class="selectpicker" id="estadoPedido" required>
   									</select>
 								</div>
 			    			</div>
@@ -340,6 +334,10 @@
 	<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript SELECTPICKER-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<script src="../../librerias/js/validarCampos/ValidarCampos.js"></script>
 
 	<script src="index.js"></script>
 </body>

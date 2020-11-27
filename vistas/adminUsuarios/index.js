@@ -11,53 +11,57 @@ $(document).ready(function() {
 
 // Evento para crear un usuario
 $("#btnRegistrarUsuario").on("click", function(e) {
-	var email 			= $("#email").val();
-	var pass 			= $("#pass").val();
-	var nombre 			= $("#nombre").val();
-	var apellido 		= $("#apellido").val();
-	var direccion 		= $("#direccion").val();
-	var telefono 		= $("#telefono").val();
-	var tipoUsuario 	= $("#tipoUsuario").val();
 
-	var data = new FormData();
-	data.append('email', email);
-	data.append('pass', pass);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('telefono', telefono);
-	data.append('tipoUsuario', tipoUsuario);
+	validaCrearEditarUsuario('crear', function() {
+		var email 			= $("#email").val();
+		var pass 			= $("#pass").val();
+		var nombre 			= $("#nombre").val();
+		var apellido 		= $("#apellido").val();
+		var direccion 		= $("#direccion").val();
+		var telefono 		= $("#telefono").val();
+		var tipoUsuario 	= $("#tipoUsuario").val();
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/registro.php", true);
-    solicitud.send(data);
+		var data = new FormData();
+		data.append('email', email);
+		data.append('pass', pass);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('telefono', telefono);
+		data.append('tipoUsuario', tipoUsuario);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Usuario creado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaUsuarios(function() {
-        				$("#modalUsuario").modal('hide');
-        				limpiarModalUsuario(function() {
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/registro.php", true);
+	    solicitud.send(data);
 
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la creación del usuario, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Usuario creado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaUsuarios(function() {
+	        				$("#modalUsuario").modal('hide');
+	        				limpiarModalUsuario(function() {
+
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la creación del usuario, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	})
+
 });
 
 // Cuando el modal de usuarios se cierre, se limpian los campos
@@ -110,49 +114,53 @@ $(document).on('click', '.editarUsuario', function() {
 
 // Evento para editar el usuario
 $("#btnEditarUsuario").on("click", function(e) {
-	var email 			= $("#email").val();
-	var nombre 			= $("#nombre").val();
-	var apellido 		= $("#apellido").val();
-	var direccion 		= $("#direccion").val();
-	var telefono 		= $("#telefono").val();
+	
+	validaCrearEditarUsuario('editar', function() {
+		var email 			= $("#email").val();
+		var nombre 			= $("#nombre").val();
+		var apellido 		= $("#apellido").val();
+		var direccion 		= $("#direccion").val();
+		var telefono 		= $("#telefono").val();
 
-	var data = new FormData();
-	data.append('idUsuario', idUsuario);
-	data.append('email', email);
-	data.append('nombre', nombre);
-	data.append('apellido', apellido);
-	data.append('direccion', direccion);
-	data.append('telefono', telefono);
+		var data = new FormData();
+		data.append('idUsuario', idUsuario);
+		data.append('email', email);
+		data.append('nombre', nombre);
+		data.append('apellido', apellido);
+		data.append('direccion', direccion);
+		data.append('telefono', telefono);
 
-	// Servicio web
-    var solicitud = new XMLHttpRequest();
-    solicitud.open("POST", "../../server/Clases/editarUsuario.php", true);
-    solicitud.send(data);
+		// Servicio web
+	    var solicitud = new XMLHttpRequest();
+	    solicitud.open("POST", "../../server/Clases/editarUsuario.php", true);
+	    solicitud.send(data);
 
-    solicitud.onreadystatechange = function() {
-        if(solicitud.readyState == 4) {
-        	var respuesta = solicitud.responseText;
-        	if(respuesta == 0) {
-        		swal({
-        			title: "FerreApp", 
-        			text: "Usuario editado correctamente!.", 
-        			icon: "success"
-        		}).then(function() {
-        			recargarTablaUsuarios(function() {
-        				$("#modalUsuario").modal('hide');
-        				limpiarModalUsuario(function() {
-        				});
-        			});
-        		});
-        	} else {
-        		swal(
-        			"FerreApp", 
-        			"Hubo un problema con la edición del usuario, comuniquese con el administrador.", 
-        			"error"
-        		);
-        	}
-        }
-    }
+	    solicitud.onreadystatechange = function() {
+	        if(solicitud.readyState == 4) {
+	        	var respuesta = solicitud.responseText;
+	        	if(respuesta == 0) {
+	        		swal({
+	        			title: "FerreApp", 
+	        			text: "Usuario editado correctamente!.", 
+	        			icon: "success"
+	        		}).then(function() {
+	        			recargarTablaUsuarios(function() {
+	        				$("#modalUsuario").modal('hide');
+	        				limpiarModalUsuario(function() {
+	        				});
+	        			});
+	        		});
+	        	} else {
+	        		swal(
+	        			"FerreApp", 
+	        			"Hubo un problema con la edición del usuario, comuniquese con el administrador.", 
+	        			"error"
+	        		);
+	        	}
+	        }
+	    }
+	})
+
 });
 
 // Funcion para eliminar un usuario
@@ -318,4 +326,136 @@ function validarCampos(callback) {
     ValidarLetrasEspacio("#apellido");
     ValidarTipoTexto("#direccion");
     ValidarSoloNumeros("#telefono");
+}
+
+
+function validaCrearEditarUsuario(tipo, callback) {
+
+	if(tipo == 'crear') {
+		if($("#email").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if($("#email").val().indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#pass").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: pass, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#nombre").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#apellido").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#direccion").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#telefono").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		// Si pasa todas las validaciones, se procede con la creación
+		callback();
+
+	} else {
+
+		if($("#email").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: email, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		} 
+
+		if($("#email").val().indexOf('@', 0) == -1) {
+			swal(
+				"FerreApp", 
+				"El campo: email, no se ha digitado un correo electrónico.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#nombre").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: nombre, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#apellido").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: apellido, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#direccion").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: direccion, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		if($("#telefono").val() == '') {
+			swal(
+				"FerreApp", 
+				"El campo: telefono, se encuentra vacio.",
+				"warning"
+			);
+			return;
+		}
+
+		// Sí pasa todas las validaciones, se procede con la edición
+		callback();
+	}
+
 }
