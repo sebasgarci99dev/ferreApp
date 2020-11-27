@@ -270,6 +270,7 @@ $(document).on('click', '#btnCambiarPass', function() {
 function iniciarTablaUsuarios(callback) {
 
     $("#tablaUsuarios").DataTable({
+    	"scrollX": true,
     	"ajax" : {
     		"method" : "POST",
     		"url" : "../../server/Clases/cargarUsuarios.php"

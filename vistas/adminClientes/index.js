@@ -242,6 +242,7 @@ $(document).on('change', '#selectDepto', function() {
 function iniciarTablaClientes(callback) {
 
     $("#tablaClientes").DataTable({
+    	"scrollX": true,
     	"ajax" : {
     		"method" : "POST",
     		"url" : "../../server/Clases/cargarClientes.php"

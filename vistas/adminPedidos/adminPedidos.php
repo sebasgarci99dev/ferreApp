@@ -142,7 +142,7 @@
 			      				<div class="input-group mb-3">
 			      					<div class="input-group-prepend">
 			      						<span class="input-group-text" id="inputGroup-sizing-default">Seleccionar: </span>
-			      						<select class="selectpicker form-control" id="selectClientes" data-live-search="true" data-style="btn-info" data-width="20rem">
+			      						<select class="selectpicker form-control" id="selectClientes" data-live-search="true" data-style="btn-info" data-width="100%">
 			      						</select>
 			      					</div>
 			      				</div>
@@ -192,7 +192,7 @@
 								<div class="input-group mb-4">
 			      					<div class="input-group-prepend">
 			      						<span class="input-group-text" id="inputGroup-sizing-default">Seleccionar: </span>
-			      						<select class="selectpicker form-control" id="selectProductos" data-live-search="true" data-style="btn-info" data-width="21rem" data-size="5">
+			      						<select class="selectpicker form-control" id="selectProductos" data-live-search="true" data-style="btn-info" data-width="50%" data-size="5">
 			      						</select>
 			      						<input type="number" class="form-control" id="cantidadProd" placeholder="Cant.">
 			      						<button type="button" id="btnAgregarProductos" class="btn btn-info">
