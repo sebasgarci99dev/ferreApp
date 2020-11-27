@@ -72,7 +72,7 @@
 		#tablaTramitePedidos thead th,
 		#tablaPedidos thead td,
 		#tablaPedidos tbody td, {
-		    text-align: center;
+		    text-align: right;
 		}
 
 		#btnIngresoProduto {
