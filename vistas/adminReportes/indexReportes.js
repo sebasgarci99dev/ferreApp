@@ -57,9 +57,11 @@ function iniciarTablaModuloReportes(callback) {
 }
 
 $(document).on('click', '.generarReporte', function () {
+	console.log('se presiona el boton de listar reporte');
 	
 	var idReporte;
 	idReporte=$(this).data('id');
+	console.log(idReporte);
 	switch(idReporte){
 		case 21:
 			window.location="../adminReportes/Reportes/Reporte21.php";
@@ -69,6 +71,18 @@ $(document).on('click', '.generarReporte', function () {
 		break;
 		case 23:
 			window.location="../adminReportes/Reportes/Reporte23.php";
+		break;
+		case 31:
+			window.location="../adminReportes/Reportes/Reporte31.php";
+		break;
+		case 32:
+			window.location="../adminReportes/Reportes/Reporte32.php";
+		break;
+		case 41:
+			window.location="../adminReportes/Reportes/Reporte41.php";
+		break;
+		case 42:
+			window.location="../adminReportes/Reportes/Reporte42.php";
 		break;
 	}
 	

@@ -65,10 +65,10 @@
 			padding: 1% 2%;
 		}
 
-		#tablarReporte21 tbody td{
+		#tablarReporte42 tbody td{
 		    text-align: center;
 		},
-		#tablaReporte21 thead th {
+		#tablaReporte42 thead th {
 		    text-align: center;
 		}
 	</style>
@@ -79,7 +79,7 @@
 		    	<button class="btn btn-info" id="volverMenu" type="button"> Volver </button>
 	    	</a>
 	    	<div class="col-11 d-flex justify-content-center" style="color: black;">
-	    		<h1> FerreApp > Reportes > Inventario Valorizado por Categoria</h1>
+	    		<h1> FerreApp > Reportes > Valorizado Pedidos no entregados</h1>
 	    	</div>
 	  	</nav>
 	</div>
@@ -93,14 +93,17 @@
 	</div>
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaReporte21" class="display nowrap" style="width:100%">
+		<table id="tablaReporte42" class="display nowrap" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>Id Categoria</th>
-					<th>Nombre Categoria</th>
-					<th>Valorizado </th>
-	            </tr>
-	        </thead>
+	                <th>Nro Pedido</th>
+					<th>Cliente</th>
+					<th>Fecha Pedido</th>
+					<th>Valor</th>
+					<th>Estado</th>
+	
+					
+					</thead>
 	        <tbody>
 	        </tbody>
 	    </table>
@@ -124,32 +127,36 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-	
 	<script>    
 
     $(document).ready(function () {
-	iniciarTablaReporte21(function () {
+	iniciarTablaReporte42(function () {
 
 	});
     });
 
 
-    function iniciarTablaReporte21(callback) {
+    function iniciarTablaReporte42(callback) {
 
-        console.log("ingresa a la funcion iniciar tabla producto");
-        $("#tablaReporte21").DataTable({
+        console.log("ingresa a la funcion iniciar tabla reporte 42");
+        $("#tablaReporte42").DataTable({
         "ajax": {
         "method": "POST",
-        "url": "../Reportes/Reporte21SQL.php"
+        "url": "../Reportes/Reporte42SQL.php"
 
     	},
-
 		"columns": [
-			{ "data": "idCategoria" },      
-			{ "data": "categoria" },
-			{ "data": "valorizado" }
-		
-   		 ],
+			{ "data": "idPedido" },      
+			{ "data": "nombre_apellido" },
+			{ "data": "fechaPedido" },
+			{ "data": "valor" },
+			{ "data": "estado" }
+
+			
+					
+			],
+			
+
 		"language": {
 			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
 		},
@@ -183,13 +190,14 @@
 				titleAttr: 'Copiar',
 				className: 'btn btn-info'
 			},
-		],
-		"columnDefs": [
+		]
+	/*	"columnDefs": [
 
    		 		{ className: "dt-body-right", "targets": [2] }
 			 
-			] 
+			] */
 		
+
 
     
 	});

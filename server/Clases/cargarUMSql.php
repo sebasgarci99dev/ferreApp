@@ -17,8 +17,8 @@
 		 u.idUnidadMedida, 
 		 u.unidadMedida, 
 		 u.descripcionUnidad 
-		FROM unidadMedida u
-		WHERE u.idUnidadMedida = $idUnidadMedida";
+		FROM unidadmedida u
+		WHERE u.idUnidadmedida = $idUnidadMedida";
 
 
 

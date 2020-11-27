@@ -3,15 +3,23 @@
 require_once('../../../server/Clases/conexion.php');
 
 $consulta ="
-    SELECT
-    c.idCategoria, 
+SELECT
+    c.idCategoria,
     if(c.categoria<=>null,'TOTAL',c.categoria) AS categoria,
-    FORMAT(SUM(s.stock*pr.precio),0) as valorizado
-    FROM categoriaproducto c
-    JOIN producto p on c.idCategoria=p.idCategoria
-    JOIN stockproductos s on s.idProducto=p.idProducto
-    JOIN precioproducto pr on pr.idProducto = s.idProducto
+  	FORMAT (SUM(pr.precio*pp.cantidad),0) AS venta
+    
+    from pedidos pd
+    join pedidosproductos pp on pd.idPedido=pp.idPedido
+    join producto p on p.idProducto=pp.idProducto
+    join precioproducto pr on p.idProducto=pr.idProducto
+    join categoriaproducto c on p.idCategoria =  c.idCategoria
+    WHERE idEstadoPedido = 4
     group by c.categoria WITH ROLLUP
+   
+
+
+    
+  
   ";
 
    

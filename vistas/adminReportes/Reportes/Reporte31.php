@@ -65,10 +65,10 @@
 			padding: 1% 2%;
 		}
 
-		#tablarReporte21 tbody td{
+		#tablarReporte31 tbody td{
 		    text-align: center;
 		},
-		#tablaReporte21 thead th {
+		#tablaReporte31 thead th {
 		    text-align: center;
 		}
 	</style>
@@ -79,7 +79,7 @@
 		    	<button class="btn btn-info" id="volverMenu" type="button"> Volver </button>
 	    	</a>
 	    	<div class="col-11 d-flex justify-content-center" style="color: black;">
-	    		<h1> FerreApp > Reportes > Inventario Valorizado por Categoria</h1>
+	    		<h1> FerreApp > Reportes > Ventas por Clientes</h1>
 	    	</div>
 	  	</nav>
 	</div>
@@ -91,14 +91,16 @@
 		 </a>-->
 		
 	</div>
+
 	<br>
 	<div class="col-lg-12 w-100 contenedorTabla">
-		<table id="tablaReporte21" class="display nowrap" style="width:100%">
+		<table id="tablaReporte31" class="display nowrap" style="width:100%">
 	        <thead>
 	            <tr>
-	                <th>Id Categoria</th>
-					<th>Nombre Categoria</th>
-					<th>Valorizado </th>
+	                <th>Nit</th>
+					<th>Nombres y Apellidos</th>
+					<th>Venta</th>
+					<th>Estado </th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -124,32 +126,33 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-	
 	<script>    
 
     $(document).ready(function () {
-	iniciarTablaReporte21(function () {
+	iniciarTablaReporte31(function () {
 
 	});
     });
 
 
-    function iniciarTablaReporte21(callback) {
+    function iniciarTablaReporte31(callback) {
 
-        console.log("ingresa a la funcion iniciar tabla producto");
-        $("#tablaReporte21").DataTable({
+        console.log("ingresa a la funcion iniciar tabla reporte 31");
+        $("#tablaReporte31").DataTable({
         "ajax": {
         "method": "POST",
-        "url": "../Reportes/Reporte21SQL.php"
+        "url": "../Reportes/Reporte31SQL.php"
 
     	},
-
 		"columns": [
-			{ "data": "idCategoria" },      
-			{ "data": "categoria" },
-			{ "data": "valorizado" }
+			{ "data": "codigo" },      
+			{ "data": "nombre_apellido" },
+			{ "data": "venta_confirmada" },
+			{ "data": "estado" }
 		
-   		 ],
+			],
+			
+
 		"language": {
 			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
 		},
@@ -190,6 +193,7 @@
 			 
 			] 
 		
+
 
     
 	});

@@ -83,7 +83,7 @@
 	<div
 	 class="col-lg-12 col-12 d-flex flex-row-reverse">
 	 	<!--<a href="adminReportes.php" >-->
-	 	<button class="btn btn-lg btn-info" id="btnAdminReportes" >Administrar Reportes</button>
+	 	<!--<button class="btn btn-lg btn-info" id="btnAdminReportes" >Administrar Reportes</button>-->
 		<!-- </a>-->
 	</div>
 	<br>
@@ -119,10 +119,10 @@
 						require_once('../../server/Clases/conexion.php');
 						// Realizamos la consulta para extraer los datos
 						$consulta="
-							SELECT
+							SELECT	
 							u.idModulo, 
 							u.nombre_modulo
-							FROM modulo u where u.idModulo !=6";
+							FROM modulo u where u.idModulo !=6 and u.idModulo !=1 and u.idModulo !=5";
 						$valores = mysqli_query($conexion, $consulta) or die('no se consulto el Modulo');
 						while ($seleccion = mysqli_fetch_array($valores)) {
 						echo '<option value="'.$seleccion[idModulo].'">'.$seleccion[nombre_modulo].'</option>';
