@@ -27,6 +27,7 @@ function iniciarTablaModuloReportes(callback) {
 	data.idModulo = idModulo
 	
 	tabla=$("#tablaModuloReportes").DataTable({
+		"scrollX": true,
 		"ajax": {
 			"method": "POST",
 			"url": "../../server/Clases/cargarReporteSQL.php",

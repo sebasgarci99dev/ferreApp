@@ -229,6 +229,7 @@ function iniciarTablaProductos(callback) {
 
 	console.log("ingresa a la funcion iniciar tabla producto");
 	$("#tablaProductos").DataTable({
+		"scrollX": true,
 		"ajax": {
 			"method": "POST",
 			"url": "../../server/Clases/cargarProductosTabla.php"

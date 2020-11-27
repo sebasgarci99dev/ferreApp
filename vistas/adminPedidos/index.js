@@ -203,6 +203,7 @@ $(document).on('click', '#btnCrearPedido', function(e) {
 function iniciarTablaPedidos(callback) {
 
     $("#tablaPedidos").DataTable({
+    	"scrollX": true,
     	"ajax" : {
     		"method" : "POST",
     		"url" : "../../server/Clases/cargarPedidos.php"

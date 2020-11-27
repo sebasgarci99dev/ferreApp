@@ -208,6 +208,7 @@ function iniciarTablaUnidad(callback) {
 
 	console.log("ingresa a la funcion iniciar tabla producto");
 	$("#tablaUnidadMedida").DataTable({
+		"scrollX": true,
 		"ajax": {
 			"method": "POST",
 			"url": "../../server/Clases/cargarUMTabla.php"

@@ -206,6 +206,7 @@ function iniciarTablaPrecio(callback) {
 
 	console.log("ingresa a la funcion iniciar tabla precio");
 	$("#tablaPrecio").DataTable({
+		"scrollX": true,
 		"ajax": {
 			"method": "POST",
 			"url": "../../server/Clases/cargarPrecioTabla.php"
