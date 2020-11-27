@@ -69,6 +69,13 @@
                     $(".cardBodega").hide();
                     $(".cardReportes").hide();
                 }
+
+                if(respuesta.idTipoUsuario == 3) {
+                    $(".cardAdminUsers").hide();
+                    $(".cardProveedores").hide();
+                    $(".cardPedidos").hide();
+                    $(".cardClientes").hide();
+                }
             }
         }
     }
